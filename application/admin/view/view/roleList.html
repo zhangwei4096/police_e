@@ -1,0 +1,101 @@
+{include file="public/head"}
+<meta charset="utf-8">
+    <title>角色管理页面</title>
+    </head>
+    <script>
+    function addRole(){
+        //添加角色ID
+        $('#dlg').dialog('open').dialog('center').dialog('setTitle','角色添加');
+        $('#fm').form('clear');
+        url = '/json/Role/add';
+    }
+
+    function saveRole(){
+        //角色保存
+        $('#fm').form('submit',{
+            url:url,
+            onSubmit: function(){
+                return $(this).form('validate');
+            },
+            success: function(data){
+                var data = eval('(' + data + ')');
+                if(data.result == 1){
+                    //执行成功
+                    $('#dlg').dialog('close');
+                    $('#dg').datagrid('reload');
+                }else{
+                    alert(data.message);
+                }
+            }
+        });
+    }
+
+    function delRole(){
+        //删除角色
+        var row = $('#dg').datagrid('getSelected');
+        if(row){
+            $.messager.confirm('Confirm','确定删除 '+row.role_id+' 此角色?',function(f){
+                if(f){
+                    $.post('/json/Role/delete',{id:row.id},function(data){
+                        // var data = eval('(' + data + ')');
+                        if(data.result == 1){
+                            //删除成功
+                            $('#dg').datagrid('reload'); //重新获取数据 == 刷新当前页面
+                        }else{
+                            alert(data.message);
+                        }
+                    });
+                }
+            });
+        }else{
+            message();
+        }
+    }
+
+</script>
+<body>
+    
+    <!-- 工具栏 -->
+    <div id="tb">      
+            <a href="javascript::void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addRole()">添加角色</a>
+            <!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">修改</a> -->
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="delRole()">删除角色</a>    
+    </div>
+
+
+
+
+    <!-- 查询表单 --> 
+
+    <table id="dg" title="角色管理" class="easyui-datagrid" style="width:550px;height:250px"  pagination="true" rownumbers="true" fit="true"   url="/json/Role" singleSelect="true"  toolbar="#tb">
+         <thead>
+
+                <tr>
+                    
+                    <th field="role_id" width="100%" walign="center">角色ID</th>
+                    
+                </tr>
+        </thead>
+    </table>
+
+    <!--弹出对话框-->
+    <div id="dlg" class="easyui-dialog" closed="true" buttons="#dlg-buttons">
+        <form id="fm" method="post" novalidate>
+            <!-- <div class="ftitle">用户信息</div> -->
+            <div class="fitme">
+                <label for="roleID">角色ID:</label>
+                <input name="role_id" id="roleID" class="easyui-textbox" required="true" /> 
+            </div>
+        </form>
+    </div>
+
+
+     <!-- 保存和关闭按钮 -->
+    <div id="dlg-buttons">
+        <a href="javascript:void(0)" onclick="saveRole()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
+        <a href="javascript:void(0)" onclick="closeDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+    </div>
+
+
+</body>
+</html>

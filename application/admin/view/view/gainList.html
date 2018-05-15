@@ -1,0 +1,156 @@
+{include file="public/head"}
+<meta charset="utf-8">
+    <title>成果列表</title>
+</head>
+<!--引入引入kindeditor编辑器相关文件-->
+    <link rel="stylesheet" href="/static/kindeditor/themes/default/default.css"/>
+    <script charset="utf-8" src="/static/kindeditor/kindeditor-all.js"></script>
+    <script charset="utf-8" src="/static/kindeditor/lang/zh-CN.js"></script>
+<script type="text/javascript">
+ $(function () {
+        //详情编辑器
+        KindEditor.ready(function (K) {
+            this.editor
+                = K.create('textarea[id="editor"]', {
+                items: ['source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+                    'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                    'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                    'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                    'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                    'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'multiimage',
+                    'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+                    'anchor', 'link', 'unlink'],
+                uploadJson: '/images',//指定上传图片的服务器端程序
+                fileManagerJson: '/images',//指定浏览远程图片的服务器端程序
+                allowFileManager: true
+            });
+        });
+    });
+</script>
+
+<script>
+    $(function(){
+
+        $('#dg').datagrid({
+            url:'/json/Product',
+            columns:[[
+                {field:'id',title:'id',width:'50',align:'center'},
+                {field:'title',title:'标题',width:'200',align:'center'},
+                // {field:'content',title:'内容',width:'200',align:'center'},
+                {field:'add_time',title:'添加时间',width:'200',align:'center'},
+                {field:'up_time',title:'修改时间',width:'200',align:'center'},
+                {field:'thumb',title:'缩略图',width:'200',align:'center'},
+                {field:'short_video',title:'短视频',width:'200',align:'center'},
+                {field:'views',title:'查看数',width:'200',align:'center'},
+                {field:'likes',title:'点赞数',width:'200',align:'center'}
+            ]]
+        });
+
+        // $('#m_info').dialog({
+        //     onClose:function(){
+        //         $('#m_info').dialog("destroy");  //清除当前数据
+        //     }
+        // })
+    });
+
+    function showMore() {
+        // 查看成果详情
+        var row = $('#dg').datagrid('getSelected');
+        if (row) {
+
+            $('#m_info').dialog('open').dialog('center').dialog('setTitle','成果详情');
+            
+                $('#fm').form('load',row);
+                editor.html(row.content);  //加载数据
+           
+        }else{
+            message();
+        }
+    }
+
+
+
+    // function showPj(){
+    //     //查看评价
+    //      var row = $('#dg').datagrid('getSelected');
+    //     if (row) {
+
+    //         $('#s_pj').dialog('open').dialog('center').dialog('setTitle','查看评价');
+
+        
+    //         $('#s_pj_list').datagrid({
+            
+    //             url:'http://localhost/zhangwei/plice_e_web/admin/getinfo.php?id='+row.id,
+    //             columns:[[
+    //                 {field:'id',title:'id',width:'50',align:'center'},
+    //                 {field:'title',title:'标题',width:'200',align:'center'},
+    //                 {field:'content',title:'内容',width:'200',align:'center'},
+    //                 {field:'add_time',title:'添加时间',width:'200',align:'center'},
+    //                 {field:'thumb',title:'缩略图',width:'200',align:'center'},
+    //                 {field:'short_video',title:'短视频',width:'200',align:'center'},
+    //                 {field:'likes',title:'点赞数',width:'200',align:'center'}
+    //             ]]
+    //         });
+
+
+    //     }else{
+    //         message();
+    //     }
+    // }
+
+
+
+    
+</script>
+<body>
+    <!-- 工具栏-->
+    <div id="tb">
+        <a href="javascript:viod(0)" class="easyui-linkbutton" iconCls="icon-help" plain="true" onclick="showMore()">查看成果详情</a>
+       <!--  <a href="javascript:viod(0)" class="easyui-linkbutton" iconCls="icon-help" plain="true" onclick="showPj()">查看评价</a>  -->   
+    </div>
+
+    <!--展示表单-->
+    <table id="dg" title="成果页面" class="easyui-datagrid" pagination="true" rownumbers="true"  fit="true"   singleSelect="true"  toolbar="#tb">
+        
+    </table>
+
+    <!--查看详情--> 
+    <div id="m_info" class="easyui-dialog" closed="true" style="width: 800px; padding: 10px 30px;">
+        <form id="fm">
+
+            <div class="fitem">
+                <label>标题:</label>
+                <input name="title" class="easyui-textbox" readonly />
+            </div>
+            
+            <div class="fitem">
+                <label>缩略图:</label>
+                <input name="thumb" class="easyui-textbox" readonly  />
+            </div>
+ 
+            <div class="fitem">
+                <label>短视频:</label>
+                <input name="short_video" class="easyui-textbox" readonly />
+            </div>
+ 
+            <div class="fitem">
+                <label>内容:</label>
+                <textarea id="editor" name="content" style="width:700px;height:400px;">
+                    
+                </textarea>  
+            </div>
+
+        </form>
+    </div>
+
+    <!--查看评价-->
+    
+    <div id="s_pj" class="easyui-dialog" closed="true">
+        <table id="s_pj_list" class="easyui-datagrid" width="800" pagination="true" rownumbers="true" >
+               
+                
+        </table>
+    </div>
+    
+</body>
+</html>

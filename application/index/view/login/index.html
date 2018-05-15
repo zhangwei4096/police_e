@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>登录</title>
+<link href="__CSS__/style.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+	<div class="login_bg"></div>
+	<div class="loginBox">
+		<div class="login_box">
+			<!--footer-->
+			<div class="jFooter lFooter">
+				<h3 class="color-grey-3">公安部科技信息化局提供运营 </h3>
+				<h4 class="color-grey-3">Copyright © www.××××××.com. All right reserved.</h4>
+			</div>
+			<img src="__IMG__/logo_white.png" class="lLogo"/>
+			<div class="login clearfix">
+				<div class="lgnRight fr">
+					<div class="fontsize-15">
+						你还没有账号，
+					</div>
+					<div class="fontbold fontsize-20">
+						请注册加入我们吧！
+					</div>
+					<button class="btn btn-blue btn-lg goSign">立即注册</button>
+				</div>
+				<div class="lgnForm">
+					<div class="loginTle">
+						登录<span>LOGIN</span>
+					</div>
+					<div class="lgn_form">
+						<div class="lgnInput clearfix">
+							<label class="fl name">账户</label>
+							<input type="text" placeholder="邮箱/手机号" class="fl" id="uName"/>
+						</div>
+						<div class="lgnInput clearfix">
+							<label class="fl name">密码</label>
+							<input type="text" placeholder="请输入密码" class="fl" id="uPwd"/>
+						</div>
+						<div class="lgnInput clearfix">
+							<label class="fr code clearfix">
+								<img src="__IMG__/code.png" class="fl"/>
+								<h5 class="color-grey-4 fl">
+									看不清楚？<br />
+									换一张
+								</h5>
+							</label>
+							<input type="text" placeholder="请输入验证码" class="code" id="uCode"/>
+						</div>
+						<div class="lgnBtn clearfix">
+							<h5 class="fr">忘记密码？</h5>
+							<button class="btn btn-lg goLogin" id="goLogin"><span>立即登录</span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="__JS__/jquery.js" ></script>
+	<script type="text/javascript" src="__JS__/layer/layer.js" ></script>
+	<script type="text/javascript" src="__JS__/common.js" ></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#goLogin").click(function(){
+				var uName=$("#uName").val();
+				var uPwd=$("#uPwd").val();
+				var uCode=$("#uCode").val();
+				if(uName==""||uName==null){
+					layer.msg("请输入账号");
+					return false;
+				}
+				if(uPwd==""||uPwd==null){
+					layer.msg("请输入密码");
+					return false;
+				}
+				if(uCode==""||uCode==null){
+					layer.msg("请输入验证码");
+					return false;
+				}
+			})
+		})
+	</script>
+</body>
+</html>

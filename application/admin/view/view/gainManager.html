@@ -1,0 +1,121 @@
+{include file="public/head"}
+<meta charset="utf-8">
+    <title>成果管理</title>
+</head>
+<script>
+    function openPj(){
+        //开启评价
+        $.messager.confirm('Confirm','您确定要开启评价功能吗？',function(f){
+            if(f){
+                $.post('police_e/type/jason/active/product/comment',{allow_comment_flag:true},function(data){
+                        if(data.result == 1){
+                            alert(data.message);
+                            $('#dg').datagrid('reload');
+                        }else{
+                            alert(data.message);
+                        }
+                });
+            }
+        });
+    }
+
+    function closePj(){
+        //关闭评价
+        $.messager.confirm('Confirm','您确定要关闭评价功能吗？',function(f){
+            if(f){
+                $.post('police_e/type/jason/disable/product/comment',{allow_comment_flag:false},function(data){
+                    if(data.result == 1){
+                            alert(data.message);
+                            $('#dg').datagrid('reload');
+                        }else{
+                            alert(data.message);
+                    }
+                });
+            }
+        });
+    }
+
+    
+    function gainExport(){
+        //导出成果
+        var row = $('#dg').datagrid('getSelected');  //获取页面上当前选中的数据
+        if(row){
+
+            //当用户选中当前成果数据的时候询问他是否需要导出
+            $.messager.confirm('Confirm','您确定要导出 '+row.title+' 此成果吗？',function(f){
+                if(f){
+                    $.post('police_e/type/jason/export/product',{id:row.id},function(data){
+                        //留个问题。。。这个地方需要后台执行处理完生成下载的表格地址返回
+                            if(data.result == 1){
+                                alert(data.message);
+                                //执行下载请求地址
+                            }
+                    });
+                }
+            });
+
+
+        }else{
+            message();
+        }
+    }
+
+    $(function(){
+
+         $('#dg').datagrid({
+            url:'/json/Product/query',
+            columns:[[
+                {field:'id',title:'id',width:'50',align:'center'},
+                {field:'title',title:'标题',width:'200',align:'center'},
+                // {field:'content',title:'内容',width:'200',align:'center'},
+                {field:'add_time',title:'添加时间',width:'200',align:'center'},
+                {field:'up_time',title:'修改时间',width:'200',align:'center'},
+                {field:'thumb',title:'缩略图',width:'200',align:'center'},
+                {field:'short_video',title:'短视频',width:'200',align:'center'},
+                {field:'views',title:'查看数',width:'200',align:'center'},
+                {field:'likes',title:'点赞数',width:'200',align:'center'}
+            ]]
+        });
+     
+     });
+
+    function gainSearch(){
+        //查询成果
+         $('#dg').datagrid('load',{
+                key_words: $('#key_words').val(), 
+            });
+    }
+
+
+</script>
+<body>
+    <!-- 工具栏 -->
+    <div id="tb">
+    <form id="searchfm" >
+        <div>
+            
+           
+            <!-- <a href="javascript::void(0)" class="easyui-linkbutton" iconCls="icon-redo"  plain="true" onclick="openPj()">开启评价</a>
+            <a href="javascript::void(0)" class="easyui-linkbutton" iconCls="icon-remove"  plain="true" onclick="closePj()">禁止评价</a> -->
+            <a href="javascript::void(0)" class="easyui-linkbutton" iconCls="icon-help" plain="true"  onclick="gainExport()">导出成果</a>
+        </div> 
+        
+        <div>
+            &nbsp;查询关键词：&nbsp;<input type="text" id="key_words" name="key_words"  size="20" />&nbsp;
+           
+            <a href="javascript:void(0)" onclick="gainSearch()" class="easyui-linkbutton" iconCls="icon-search" plain="true">查询成果</a>
+            <a href="javascript:resetSearchForm()" class="easyui-linkbutton" iconCls="icon-arrow_undo" plain="true">重置</a>
+        </div>
+     </form>    
+    </div>
+
+    <!-- 查询表单
+         查询用户使用POST请求
+     --> 
+    <table id="dg" title="成果管理" class="easyui-datagrid"  pagination="true" rownumbers="true"  fit="true"   singleSelect="true"  toolbar="#tb">
+       
+    </table>
+
+
+</body>
+</html>

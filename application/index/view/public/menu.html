@@ -1,0 +1,42 @@
+	<!--menu-->
+	<div class="jMenu">
+		<div class="mainW clearfix">
+			<div class="fr userMsg clearfix">
+				<div class="searIcon umIcon fl">
+					<input type="search" placeholder="没有找不到的小设备"/>
+				</div>
+				<a href="{:url('Login/index')}">登录</a>|<a href="{:url('Register/index')}">注册</a>			
+				<!--用户登录信息<a href="releaseAchieve.html"><div class="editIcon umIcon fl"></div></a>
+				 <div class="userName umIcon clearfix fl">
+					<div class="nameBtn">
+						<a href="mycenter.html">
+							<img class="userHeade fl" src="images/user/user.jpg"/>
+							<h4 class="fl">王小波</h4>
+						</a>
+					</div>
+					<ul>
+						<li class="userLi userLi_1"><a href="myrelease.html"><h4>我的发布</h4></a></li>
+						<li class="userLi userLi_2"><a href="mycollect.html"><h4>我的收藏</h4></a></li>
+						<li class="userLi userLi_3"><a href="mymessage.html"><h4>我的消息</h4></a></li>
+						<li class="userLi userLi_4"><a href="mysetting.html"><h4>个人设置</h4></a></li>
+						<li class="userLi userLi_5"><h4>退出账号</h4></li>
+					</ul>
+				</div> -->
+			</div>
+			<div class="fl jLogo clearfix">
+				<img src="__IMG__/logo.png"/>
+			</div>
+			<div class="jmenu fl">
+				<ul>
+					<li {eq name=":request()->controller()" value="Index" } class="active"  {/eq} ><a href="{:url('Index/index')}"><div class="menuLi">首页</div></a></li>
+					<li {eq name=":request()->controller()" value="News" } class="active"  {/eq} ><a href="{:url('News/index',['category' =>0])}"><div class="menuLi">新闻</div></a></li>
+					<li><a href=""><div class="menuLi">成果</div></a></li>
+					<li><a href=""><div class="menuLi">科技人</div></a></li>
+					<!-- <li><a href="forum.html"><div class="menuLi">论坛</div></a></li>
+					<li><a href="exhibite.html"><div class="menuLi">展厅</div></a></li>
+					<li><a href="knowledge.html"><div class="menuLi">知道</div></a></li> -->
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!--menu-end-->

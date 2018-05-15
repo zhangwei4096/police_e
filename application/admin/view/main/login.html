@@ -1,0 +1,192 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>后台管理系统登录</title>
+	<script type="text/javascript" src="/static/resources/plugins/jquery-easyui-1.4.3/jquery.min.js"></script>
+</head>	
+<style type=text/css>
+body {
+	text-align: center;
+	padding-bottom: 0px;
+	background-color: #ddeef2;
+	margin: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px
+}
+
+a:link {
+	color: #000000;
+	text-decoration: none
+}
+
+a:visited {
+	color: #000000;
+	text-decoration: none
+}
+
+a:hover {
+	color: #ff0000;
+	text-decoration: underline
+}
+
+a:active {
+	text-decoration: none
+}
+
+.input {
+	border-bottom: #ccc 1px solid;
+	border-left: #ccc 1px solid;
+	line-height: 20px;
+	width: 182px;
+	height: 20px;
+	border-top: #ccc 1px solid;
+	border-right: #ccc 1px solid
+}
+
+.input1 {
+	border-bottom: #ccc 1px solid;
+	border-left: #ccc 1px solid;
+	line-height: 20px;
+	width: 120px;
+	height: 20px;
+	border-top: #ccc 1px solid;
+	border-right: #ccc 1px solid;
+}
+</style>
+
+</head>
+<body>
+<FORM id=adminlogin  method=post
+	name=adminlogin action="#"  >
+<div></div>
+<table style="MARGIN: auto; WIDTH: 100%; HEIGHT: 100%" border=0
+	cellSpacing=0 cellPadding=0>
+	<tbody>
+		<tr>
+			<td height=150>&nbsp;</td>
+		</tr>
+		<tr style="HEIGHT: 254px">
+			<td>
+			<div style="MARGIN: 0px auto; WIDTH: 936px"><IMG
+				style="DISPLAY: block" src="/static/resources/images/body_03.jpg"></div>
+			<div style="BACKGROUND-COLOR: #278296">
+			<div style="MARGIN: 0px auto; WIDTH: 936px">
+			<div
+				style="BACKGROUND: url(/static/resources/images/body_05.jpg) no-repeat; HEIGHT: 155px">
+			<div
+				style="TEXT-ALIGN: left; WIDTH: 265px; FLOAT: right; HEIGHT: 125px; _height: 95px">
+			<table border=0 cellSpacing=0 cellPadding=0 width="100%">
+				<tbody>
+					<tr>
+						<td style="HEIGHT: 45px"><input type="text" class="input" id="username"   name="username" id="userName"></td>
+					</tr>
+					<tr>
+						<td><input type="password" class="input"   name="password" id="password"/></td>
+					</tr>
+					<tr>
+
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			<div style="HEIGHT: 1px; CLEAR: both"></div>
+			<div style="WIDTH: 380px; FLOAT: right; CLEAR: both">
+			<table border=0 cellSpacing=0 cellPadding=0 width=300>
+				<tbody>
+					
+					<tr>
+						<td width=100 align=right><input
+							style="BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px"
+							id=btnLogin src="/static/resources/images/btn1.jpg" type=image name=btnLogin onclick="javascript:login();return false;"></td>
+						<td width=100 align=middle><input
+							style="BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px"
+							id=btnReset src="/static/resources/images/btn2.jpg" type=image name=btnReset onclick="javascript:adminlogin.reset();return false;"></td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			</div>
+			</div>
+			</div>
+			<div style="MARGIN: 0px auto; WIDTH: 936px"><IMG
+				src="/static/resources/images/body_06.jpg"></div>
+			</td>
+		</tr>
+		<tr style="HEIGHT: 30%">
+			<td>&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+</FORM>
+</body>
+</html>
+<script type="text/javascript">
+// 	function login(){
+// 		var userName=$("#userName").val();
+// 		var password=$("#password").val();
+// 		var roleName=$("#roleName").val();
+// 		if(userName==null||userName==""){
+// 			alert("用户名不能为空！");
+// 			return;
+// 		}
+// 		if(password==null||password==""){
+// 			alert("密码不能为空！");
+// 			return;
+// 		}
+// 		if(roleName==null||roleName==""){
+// 			alert("请选择用户类型！");
+// 			return;
+// 		}
+// 		$("#adminlogin").submit();			
+		
+// 	}
+	
+	
+	// 记住密码变换
+	 function Rememberpwd() {
+		var type = $("#rememberpwd").attr("class");
+		if (type == 'select') {
+			$("#rememberpwd").attr("class", "selected");
+		} else {
+			$("#rememberpwd").attr("class", "select");
+
+		}
+	}
+    
+	// 登录后
+	function lgUser(rs) {
+		if (rs.code == "0000") {
+			window.location.href = "#";
+		} else {
+			alert(rs.msg);
+		}
+	}
+	
+	// 登录
+   function login() {
+	//	SetPwdAndChk();
+		var name = $("#username").val();
+		var pwd = $("#password").val();
+
+		if (name.replace(/\s+/g, "") == "") {
+			alert("用户名不能为空!");
+			return; 
+		}
+		if (pwd.replace(/\s+/g, "") == "") {
+			alert("密码不能为空");
+			return;
+		} 
+		
+		$.post('/admin/Login/action',{username:name,password:pwd},function(data){
+				if(data.msg == 'ok'){
+					//验证通过执行页面跳转
+					window.location.href="/admin/Main/index";
+				}else{
+					alert(data.data);
+				}
+		});
+	
+	}
+	
+</script>

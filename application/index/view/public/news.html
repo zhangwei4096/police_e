@@ -1,0 +1,65 @@
+<!--news-->
+	<div class="newsList" style="background-image: url(__IMG__/banner.png);">
+		<div class="mainW">
+			<div class="newsInner clearfix">
+				<div class="swiper-container newsSwiper fl">
+			        <div class="swiper-wrapper">
+			        {volist name="banner" id="list" }
+			            <div class="swiper-slide" style="background: url({$list.thumb}) no-repeat top center ;">
+			            	<div class="bannrText color-white">
+				        		<div class="fontsize-43">消防布控系统</div>
+				        		<h3 class="color-white">消防检测 消防工程验收 消防设备</h3>
+				        		<button class="btn btn-l">查看详情</button>
+				        	</div>
+			            </div>
+			          {/volist}  
+			          
+			         	<!-- <div class="swiper-slide" style="background-image: url(__IMG__/user/newsImg.png);">
+			            	<div class="bannrText color-white">
+				        		<div class="fontsize-43">消防布控系统</div>
+				        		<h3 class="color-white">消防检测 消防工程验收 消防设备</h3>
+				        		<button class="btn btn-l">查看详情</button>
+				        	</div>
+			            </div>
+			            <div class="swiper-slide" style="background-image: url(__IMG__/user/newsImg.png);">
+			            	<div class="bannrText color-white">
+				        		<div class="fontsize-43">消防布控系统</div>
+				        		<h3 class="color-white">消防检测 消防工程验收 消防设备</h3>
+				        		<button class="btn btn-l">查看详情</button>
+				        	</div>
+			            </div> -->
+			            
+			        </div>
+			    </div>
+			    <!-- 首页展示 科技资讯的3条最新的新闻 -->
+			    <div class="swiper-button-next"></div>
+	        	<div class="swiper-button-prev"></div>
+			    <div class="newsText fl">
+					<div class="newsTle">
+						<a href="{:url('News/index')}"><div class="moreBtn fr"></div></a>
+						<h1 class="color-grey-1">科技资讯</h1>
+					</div>
+					<div class="nsList color-grey">
+						<ul>
+							{$news}
+								<!--<a href="achieveText.html">
+									<div class="moreRead">
+										<div class="moreR">
+											Read More
+										</div>
+									</div>
+									<div class="newsTime">
+										<h5><span class="ntData">07</span>/<span class="ntData">22</span></h5>
+									</div>
+									<div class="ellipsis nslText">
+										美媒：马航机长曾用模拟软件演练自杀飞行路线飞行行路软件演练自杀飞行路线飞行行路
+									</div>
+								</a>
+							</li> -->
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--news-end-->

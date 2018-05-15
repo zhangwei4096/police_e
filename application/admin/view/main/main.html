@@ -1,0 +1,241 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>后台管理系统主页</title>
+<link rel="stylesheet" type="text/css" href="/static/resources/plugins/jquery-easyui-1.4.3/themes/IconExtension.css">
+<link rel="stylesheet" type="text/css" href="/static/resources/plugins/jquery-easyui-1.4.3/themes/metro/easyui.css">
+<link rel="stylesheet" type="text/css" href="/static/resources/plugins/jquery-easyui-1.4.3/themes/icon.css">
+<script type="text/javascript" src="/static/resources/plugins/jquery-easyui-1.4.3/jquery.min.js"></script>
+<script type="text/javascript" src="/static/resources/plugins/jquery-easyui-1.4.3/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/static/resources/plugins/jquery-easyui-1.4.3/locale/easyui-lang-zh_CN.js"></script>
+
+<script type="text/javascript" src="/static/resources/js/validate.js"></script>
+<script type="text/javascript">
+	var url;
+	
+	function openTab(text,url,iconCls){
+		if($("#tabs").tabs("exists",text)){
+		   $("#tabs").tabs("select",text);
+		}else{
+			var content="<iframe frameborder=0 scrolling='auto' style='width:100%;height:100%' src='./view/"+url+"'></iframe>";
+			$("#tabs").tabs("add",{
+				title:text,
+				iconCls:iconCls,
+				closable:true,
+				content:content
+			});
+		}
+	}
+	
+	function openTabBackGround(text,url,iconCls){
+		if($("#tabs").tabs("exists",text)){
+// 			var content="<iframe frameborder=0 scrolling='auto' style='width:100%;height:100%' src='./"+url+"'></iframe>";
+// 			var tab = $('#tabs').tabs('getTab' , text);  // get selected panel
+// 			$('#tabs').tabs('update', {
+// 				tab: tab,
+// 				options: {
+// 					title:text,
+// 					iconCls:iconCls,
+// 					closable:true,
+// 					content:content
+// 				}
+// 			});
+			 $("#tabs").tabs("close",text);
+			  var content="<iframe frameborder=0 scrolling='auto' style='width:100%;height:100%' src='"+url+"'></iframe>";
+				$("#tabs").tabs("add",{
+					title:text,
+					iconCls:iconCls,
+					closable:true,
+					content:content
+				});
+				//./
+		}else{
+			var content="<iframe frameborder=0 scrolling='auto' style='width:100%;height:100%' src='"+url+"'></iframe>";
+			$("#tabs").tabs("add",{
+				title:text,
+				iconCls:iconCls,
+				closable:true,
+				content:content
+			});
+		}
+	}
+	
+	
+	
+	
+ formatterDate = function(date) {
+	 var day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
+	 var month = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : "0"+ (date.getMonth() + 1); 
+	 return date.getFullYear() + '-' + month + '-' + day; };  
+	 window.onload = function () {
+		 $('#startTime').datebox('setValue', formatterDate(new Date()));
+		 }  
+
+	function openPasswordModifyDialog(){
+		$("#dlg").dialog("open").dialog("setTitle","修改密码");
+		url="#";
+	}
+	
+	function closePasswordModifyDialog(){
+		$("#dlg").dialog("close");
+		$("#password").textbox("clear");
+		$("#newPwd").textbox("clear");
+		$("#newPwd2").textbox("clear");
+	}
+	
+	//修改密码
+	function modifyPassword(){
+		$("#fm").form("submit",{
+			url:url,
+			onSubmit:function(){
+				if(!$(this).form("validate")){
+					return false;
+				}
+				return true;
+			},
+			success:function(result){
+				if(res.code == '0000'){
+					$.messager.alert("系统提示","密码修改成功,下一次登录生效","info",function(){
+						closePasswordModifyDialog();
+					});
+				}else{
+					$.messager.alert("系统提示",res.msg ,"info",function(){
+						//closePasswordModifyDialog();
+					});
+					return;
+				}
+			}
+		});
+	}
+	
+	//注销登录
+	function logout(){
+		$.messager.confirm("系统提示","您确定要退出系统吗",function(r){
+			if(r){
+				window.location.href="/admin/Main/out";
+			}
+		});
+	}
+	
+</script>
+
+</head>
+<body class="easyui-layout">
+<div region="north" style="height: 78px;background-color: #E0ECFF">
+	<table style="padding: 5px" width="100%">
+		<tr>
+			<td width="50%">
+ 				<img src="/static/resources/images/bglogo.pngs" alt="logo"  title=" logo" width="350" height="47" /> 
+                  后台管理系统
+			</td>
+			<td valign="bottom" align="right" width="50%">
+				<font size="3">&nbsp;&nbsp;<strong>欢迎您：{$Think.session.username}</strong>&nbsp;&nbsp;</font>
+				<font><button  onclick="openPasswordModifyDialog()">修改密码</button></font>	
+				<font><button  onclick="logout()">安全退出</button></font>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div region="center">
+	<div class="easyui-tabs" fit="true" border="false" id="tabs">
+		<div title="首页" data-options="iconCls:'icon-home'">
+			<div align="center" style="padding-top: 100px"><font color="red" size="10">欢迎使用</font></div>
+		</div>
+	</div>
+</div>
+
+<!-- 菜单 -->
+<div region="west" style="width: 200px" title="管理系统" split="true">
+	<div class="easyui-accordion" data-options="fit:false,border:false">
+		
+	    <div title="用户管理系统"  data-options="iconCls:'icon-folder'" style="padding:10px;">
+
+			<a href="javascript:openTab('用户管理','/action/userList.html','icon-user')" data-options="plain:true,iconCls:'icon-user'" style="width: 100px;" class="easyui-linkbutton">用户管理</a>
+
+			<a href="javascript:openTab('用户审核','/action/userVerify.html','icon-user')" data-options="plain:true,iconCls:'icon-user'" style="width: 100px;" class="easyui-linkbutton">用户审核</a>
+			
+			
+
+			<a href="javascript:openTab('角色管理','/action/roleList.html','icon-user')" data-options="plain:true,iconCls:'icon-user'" style="width: 100px;" class="easyui-linkbutton">角色管理</a>
+			
+		</div>
+		 
+	<!--<div title="系统管理"  data-options="iconCls:'icon-item'" style="padding:10px">
+			<a href="javascript:openPasswordModifyDialog()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-exit'" style="width: 150px;">修改密码</a>
+			<a href="javascript:logout()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-exit'" style="width: 150px;">安全退出</a>
+		</div> -->
+
+		<div title="成果管理系统" data-options="iconCls:'icon-folder'" style="padding:10px">
+			<a href="javascript:openTab('成果管理','/action/gainManager.html','icon-book')" style="width: 100px;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-book'" >成果管理</a>	
+			<a href="javascript:openTab('成果页面','/action/gainList.html','icon-book')" style="width: 100px;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-book'" >成果页面</a>
+			<!-- <a href="javascript:openTab('成果评价管理','/action/gainPj.html','icon-book')" style="width: 100px;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-book'" >评价管理</a> -->
+
+
+		</div>
+
+		<div title="新闻管理系统" data-options="iconCls:'icon-folder'" style="padding:10px">
+			<a href="javascript:openTab('新闻管理','/action/newsManager.html','icon-book')" style="width: 100px;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-book'" >新闻管理</a>	
+			<a href="javascript:openTab('新闻页面','/action/newsList.html','icon-book')" style="width: 100px;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-book'" >新闻页面</a>		
+		</div>
+	
+		<div title="科技人系统" data-options="iconCls:'icon-folder'" style="padding:10px">
+			<a href="javascript:openTab('科技人管理','/action/scienceManager.html','icon-book')" style="width: 100px;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-book'" >科技人管理</a>	
+			<a href="javascript:openTab('科技人页面','/action/scienceList.html','icon-book')" style="width: 100px;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-book'" >科技人页面</a>		
+		</div>
+
+		<div title="知道系统" data-options="iconCls:'icon-folder'" style="padding:10px">
+			<a href="javascript:openTab('知道管理','URL','icon-book')" style="width: 100px;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-book'" >知道管理</a>	
+			<a href="javascript:openTab('知道页面','URL','icon-book')" style="width: 100px;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-book'" >知道页面</a>		
+		</div>
+
+
+	</div>
+</div>	
+
+
+
+
+<!-- 修改密码对话框  -->
+<div id="dlg" class="easyui-dialog" style="width: 400px;height:250px;padding: 10px 20px"
+  closed="true" buttons="#dlg-buttons">
+ 	<form id="fm" method="post">
+ 		<table cellspacing="8px">
+ 			<tr>
+ 				<td>用户名：</td>
+ 				<td><input type="text" id="userName" name="userName" class="easyui-textbox" value="{$Think.session.username}" readonly="readonly" style="width: 200px"/></td>
+ 			</tr>
+ 			<tr>
+ 				<td>原密码：</td>
+ 				<td><input type="password" id="password" name="password" class="easyui-textbox easyui-validatebox" required="true" style="width: 200px"/></td>
+ 			</tr>
+ 			<tr>
+ 				<td>新密码：</td>
+ 				<td><input type="password" id="newPwd" name="newPwd" class="easyui-textbox easyui-validatebox" required="true" style="width: 200px"/></td>
+ 			</tr>
+ 			<tr>
+ 				<td>确认新密码：</td>
+ 				<td><input type="password" id="newPwd2"  name="newPwd2" class="easyui-textbox easyui-validatebox" required="true"  validType="equalTo['#newPwd']"  invalidMessage="两次输入密码不匹配" style="width: 200px"/></td>
+ 			</tr>
+ 		</table>
+ 	</form>
+</div>
+
+
+<div id="dlg-buttons">
+	<a href="javascript:modifyPassword()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
+	<a href="javascript:closePasswordModifyDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+</div>
+
+
+
+
+
+
+<!-- 页脚 -->
+<div region="south" style="height: 25px;padding: 5px;" align="center">
+  <a href="#" target="_blank">成都电科维云</a> Copyright @ 2017-2018 Enniu.All Rights Reserved   蜀ICP备xxxxx号
+</div>
+
+</body>
+</html>

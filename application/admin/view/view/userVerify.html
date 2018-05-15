@@ -1,0 +1,69 @@
+{include file="public/head"}   
+    <meta charset="UTF-8">
+    <title>用户审核页面</title>
+    <script>
+    function verifyUser(){
+        //用户审核管理
+        var row = $('#dg').datagrid('getSelected');
+        if(row){
+            //获取当前没有通过审核的用户ID
+            $.messager.confirm('Confirm','确定审核通过 '+row.username+' 此用户？',function(f){
+                if (f) {
+                    //执行POST请求
+                    $.post('/json/User/approve',{userid:row.userid},function(data){
+                            // var data = eval('(' + data + ')');
+                         if(data.result == 1){
+                           $('#dg').datagrid('reload');
+                         }else{
+                            alert(data.message);
+                         }
+
+                    },'json');
+                }
+            });
+            
+        }else{
+                message();
+           }
+    }
+
+</script>
+</head>
+<body>
+     <!-- 工具栏 -->
+    <div id="tb">
+    <form id="searchfm" >
+        <div>
+            
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-tip" plain="true" onclick="verifyUser()">审核通过</a>
+            
+        </div> 
+        
+        
+     </form>    
+    </div>
+    
+    <!-- 查询表单
+            需要后台传递过来没有通过审核的用户
+     --> 
+    <table id="dg" title="用户审核" class="easyui-datagrid"  pagination="true" rownumbers="true"  fit="true"  url="/json/User/auth" singleSelect="true"  toolbar="#tb">
+         <thead>
+
+                <tr>
+                    <th field="username" width="50" align="center" hidden="true">用户名</th>
+                    <th field="real_name" width="200" align="center">真实姓名</th>
+                    <th field="sex" width="200" align="center">性别</th>
+                    <th field="delete_flag" width="60" align="center">删除标志</th>
+                    <th field="email" width="200"  align="center">邮箱</th>
+                    <th field="addr" width="300" align="center">地址</th>
+                    <th field="mobile" width="150" align="center">手机号</th>                
+                    <th field="profession" width="50" align="center">专业</th>
+                    <th field="remark" width="550" align="center">个人介绍</th>
+                </tr>
+        </thead>
+    </table>
+
+
+
+</body>
+</html>

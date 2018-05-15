@@ -1,0 +1,298 @@
+{include file="public/head"}
+<meta charset="utf-8">
+    <title>科技人管理页面</title>
+  </head>
+<!--引入引入kindeditor编辑器相关文件-->
+    <link rel="stylesheet" href="/static/kindeditor/themes/default/default.css"/>
+    <script charset="utf-8" src="/static/kindeditor/kindeditor-all.js"></script>
+    <script charset="utf-8" src="/static/kindeditor/lang/zh-CN.js"></script>
+<script type="text/javascript">
+ $(function () {
+     
+        //详情编辑器
+        // KindEditor.ready(function (K) {
+        //     this.editor
+        //         = K.create('textarea[id="editor"]', {
+        //         items: ['source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+        //             'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+        //             'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+        //             'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+        //             'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+        //             'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'multiimage',
+        //             'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+        //             'anchor', 'link', 'unlink'],
+        //         uploadJson: '/static/kindeditor/php/upload_json.php',//指定上传图片的服务器端程序
+        //         fileManagerJson: '/static/kindeditor/php/file_manager_json.php',//指定浏览远程图片的服务器端程序
+        //         allowFileManager: true
+        //     });
+        // });
+        
+        
+    });
+
+ </script>
+
+
+<body>
+<script>
+    $(function(){
+           
+
+        $('#dg').datagrid({
+            url: '/json/Science/query',
+            columns:[[
+
+                {field:'id',title:'id',hidden:'true'},
+                {field:'science_name',title:'科技人名',align:'center'},
+                {field:'title',title:'标题',width:'200',align:'center'},
+                {field:'thumb',title:'缩略图',width:'300',align:'center',formatter: function(value,row,index){
+                            return "<img src='"+row.thumb+"' width='50' />";
+                    }
+                },
+                {field:'add_time',title:'添加时间',width:'200',align:'center'},
+                {field:'recommendation',title:'科技人推荐语',width:'400',align:'center'}
+                // {field:'allow_comment_flag',title:'是否评价',width:'200',align:'center',formatter: function(value,row,index){
+                //     if(row.allow_comment_flag == 'true'){return '是';}else{return '否';}  
+                // }}
+            
+            ]]
+        });
+    
+        
+        $('#dlg').dialog({
+            //当编辑框关闭的时候清除富文本编辑器的数据
+            onClose:function(){
+             editor.html('');  
+             $("#allUrl").removeAttr("src");  
+             /* $('input[name="thumb"]').val(''); */
+            }
+        });
+        
+    });
+
+    
+    
+   
+
+ /*   function addNew(){
+        //添加科技人
+        $('#dlg').dialog('open').dialog('center').dialog('setTitle','添加新闻');
+        $('#fm').form('clear');
+
+        //这儿默认允许评论
+         $('select').each(function (i, j) {
+                var options = $(j).find("option");
+                options.attr("selected", false);
+                options.first().attr("selected", true);
+            });
+        url = '/json/News/add'; 
+    }
+
+
+    function editNew(){
+        //修改科技人
+        
+        var row = $('#dg').datagrid('getSelected');
+        if(row){
+            $('#dlg').dialog('open').dialog('center').dialog('setTitle','修改新闻');
+            $("#allUrl").attr("src",row.thumb);  
+            $('#fm').form('load',row);
+            editor.html(row.content);  //加载数据
+            url = '/json/News/update/id/'+row.id;
+        }else{
+            message();
+        }
+    }
+
+    function saveNew(){
+        //保存科技人
+        
+        $('#fm').form('submit',{
+                url:url,
+                onSubmit: function(param){
+                    param.content = editor.html();
+                    return $(this).form('validate');
+                    
+                },
+                success: function(data){
+                    var data = eval('(' + data + ')');
+                    if(data.result == 1){
+                        //执行成功 TRUE
+                        //关闭小窗口 数据刷新
+                         
+                        $('#dlg').dialog('close');
+                        $('#dg').datagrid('reload');
+                    }
+                }
+            });
+        
+    }*/
+
+
+     function Search(){
+        //科技人查询
+        $('#dg').datagrid('load',{
+               
+                key_words: $('#key_words').val(), 
+        });
+    }
+
+
+
+    function delNew(){
+        //删除数据
+        var row = $('#dg').datagrid('getSelected');
+        if(row){
+            $.messager.confirm('Confirm','您确定要删除 '+row.title+' 这篇新闻吗?',function(f){
+                $.post('/json/Science/delete',{id:row.id},function(data){
+                        // var data = eval('(' + data + ')');
+                        if (data.result == 1) {
+                            message('当前新闻删除成功');
+                            $('#dg').datagrid('reload');
+                        }
+                });
+            });
+        }else{
+            message();
+        }
+    }
+
+   /*   function openNew(){
+        //开启评价
+        $.messager.confirm('Confirm','您确定要开启评价功能吗？',function(f){
+            if(f){
+                $.post('police_e/type/jason/active/news/comment',{allow_comment_flag:true},function(data){
+                        var data = eval('(' + data + ')');
+                        if(data.result == 1){
+                            alert(data.message);
+                            $('#dg').datagrid('reload');
+                        }else{
+                            alert(data.message);
+                        }
+                });
+            }
+        });
+    }
+
+    function closeNew(){
+        //关闭评价
+        $.messager.confirm('Confirm','您确定要关闭评价功能吗？',function(f){
+            if(f){
+                $.post('police_e/type/jason/disable/news/comment',{allow_comment_flag:false},function(data){
+                    var data = eval('(' + data + ')');
+                    if(data.result == 1){
+                            alert(data.message);
+                            $('#dg').datagrid('reload');
+                        }else{
+                            alert(data.message);
+                    }
+                });
+            }
+        });
+    } */
+    
+    function uploadPic() {  
+        // 上传设置  
+        var options = {  
+                // 规定把请求发送到那个URL  
+                url: "/index/Upload/img",  
+                // 请求方式  
+                type: "post",  
+                // 服务器响应的数据类型  
+                dataType: "json",  
+                // 请求成功时执行的回调函数  
+                success: function(data, status, xhr) {  
+                    // 图片显示地址  
+                    $("#allUrl").attr("src", data.path);  
+                    $('input[name="thumb"]').val(data.path);
+                }  
+        };  
+          
+        $("#fm").ajaxSubmit(options);  
+    }  
+    
+ 
+</script>
+    <!--工具栏-->
+    <div id="tb">
+    <form id="searchfm" >
+        <div>
+            <!-- <a href="javascript::void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addNew()">增加</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editNew()">修改</a> -->
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="delNew()">删除</a>
+            <!-- <a href="javascript::void(0)" class="easyui-linkbutton" iconCls="icon-redo"  plain="true" onclick="openNew()">开启评价</a>
+            <a href="javascript::void(0)" class="easyui-linkbutton" iconCls="icon-help" plain="true"  onclick="closeNew()">禁止评价</a> -->
+        </div> 
+        
+        <div>
+            &nbsp;查询关键词：&nbsp;<input type="text" id="key_words" name="key_words"  size="20" />&nbsp;
+           
+            <a href="javascript:void(0)" onclick="Search()" class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
+            <a href="javascript:resetSearchForm()" class="easyui-linkbutton" iconCls="icon-arrow_undo" plain="true">重置</a>
+        </div>
+     </form>    
+    </div>
+
+    <!--展示表单-->
+    <table id="dg" class="easyui-datagrid" pagination="true" rownumbers="true"  fit="true" singleSelect="true"  toolbar="#tb">
+        
+    </table>
+
+
+    <!-- 弹出FORM表单 -->
+    
+  <!--   <div id="dlg"  class="easyui-dialog" closed="true" buttons="#dlg-buttons"  style="width: 900px; padding: 10px 30px;" >
+      <form id="fm" method="post" novalidate enctype="multipart/form-data">   
+       <div class="ftitle">用户信息</div>
+  
+          <div class="fitem">
+              <label>新闻标题:</label>
+              <input name="title" class="easyui-textbox easyui-validatebox"   data-options="required:true">
+          </div>
+  
+          <div class="fitem">
+              <label>新闻摘要:</label>
+              <input name="summary" class="easyui-textbox easyui-validatebox" data-options="required:true">
+          </div>
+  
+          <div class="fitem">
+              <label>缩略图地址:</label>
+              <input name="thumb" value="" readonly>
+               在选择图片的时候添加事件，触发Ajax异步上传  
+              <input name="image" type="file" onchange="uploadPic()"/>   
+          </div>
+   
+          <div class="fitem">
+              <label>缩略图预览:</label>
+              <img  width="160" height="100" id="allUrl"/>  
+          </div>
+          
+          <div class="fitem">
+              <label>短视频地址:</label>
+              <input name="short_video" class="easyui-textbox easyui-validatebox" />
+              
+          </div>
+  
+          <div class="fitem">
+              <label>新闻内容:</label>
+              <textarea id="editor" name="content" style="width: 800px;height: 450px;"></textarea>
+          </div>
+   
+          <div class="fitem">
+              <label>是否允许评论:</label>
+              <select name="allow_comment_flag">
+                  <option value="true">是</option>
+                  <option value="false">否</option>
+              </select>
+          </div>
+      <p id="eventsmessage"></p>
+  </div> 
+  
+  保存和关闭按钮
+  <div id="dlg-buttons">
+      <a href="javascript:void(0)" onclick="saveNew()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
+      <a href="javascript:void(0)" onclick="closeDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+  </div> -->
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!-- 这是新闻的首页 -->
+{include file="public/head" title="$title" /}
+
+<body>
+{include file="public/menu" /}
+
+	<div class="nBanner newsHead" style="background-image: url(__IMG__/banner2.png);">
+		<div class="mainW">
+			<div class="fontsize-48 color-white">
+				科技资讯
+				<h2 class="color-white mt5">Technology Information</h2>
+			</div>
+		</div>
+	</div>
+	<!--新闻展示-->
+	<div class="searRlt mainW">
+		<div class="searMenu reMenu">
+			<ul class="clearfix">
+				<li {eq name=":request()->param('category')"  value="0" } class="active" {/eq}><a href="{:url('News/index',['category' =>0])}">科技资讯</a></li>
+				<li {eq name=":request()->param('category')"  value="1" } class="active" {/eq} ><a href="{:url('News/index',['category' =>1])}">行业新闻</a></li>
+				<li {eq name=":request()->param('category')"  value="2" } class="active" {/eq} ><a href="{:url('News/index',['category' =>2])}">热点资讯</a></li>
+			</ul>
+		</div>
+		<div class="searList">
+			<h4 class="miniM">
+				您的位置：
+				<a href="{:url('Index/index')}"><span  class="mr10">首页</span></a>
+				>
+				<span class="color-red mrl10">新闻</span>
+			</h4>
+			<div class="reSwiper active newsPage">
+				<ul class="resUl clearfix">
+					{$news}
+            	</ul>
+            	<!--分页-->
+				<div class="pagebox clearfix">
+					<div class="pagesearch fr">
+						<span>共<?php echo ceil($page_total/6);?>页,到</span>
+						<input type="text" class="pcount" id="" name="" value="">
+						<span>页</span>
+						<input type="button" class="pbtn" id="" name="" value="确认">
+					</div>
+					 {$page}
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+
+
+	<!--footer-->
+	{include file="public/footer" /}
+	<script type="text/javascript">
+	/* 	$(function(){
+			$(".searMenu li").click(function(){
+				$(this).addClass('active').siblings().removeClass('active');
+				var index=$(this).index();
+				var value=$(this).html(); //获取当前的分类
+				//11.27改
+				$(".reSwiper").eq(index).addClass("active").siblings().removeClass("active");
+				//11.27改
+			})
+		}) */
+	</script>
+</body>
+</html>

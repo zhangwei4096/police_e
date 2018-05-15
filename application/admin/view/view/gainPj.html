@@ -1,0 +1,56 @@
+{include file="public/head"}
+<meta charset="utf-8">
+    <title>成果评价管理</title>
+</head>
+<script>
+    $(function(){
+        $('#dg').datagrid({
+            //测试数据
+            url:'http://localhost/zhangwei/plice_e_web/admin/getinfo.php',
+                columns:[[
+                    {field:'id',title:'id',width:'50',align:'center'},
+                    {field:'title',title:'标题',width:'200',align:'center'},
+                    {field:'content',title:'内容',width:'200',align:'center'},
+                    {field:'add_time',title:'添加时间',width:'200',align:'center'},
+                    {field:'thumb',title:'缩略图',width:'200',align:'center'},
+                    {field:'short_video',title:'短视频',width:'200',align:'center'},
+                    {field:'likes',title:'点赞数',width:'200',align:'center'}
+                ]]
+        });
+    });
+
+    function delPj(){
+        //删除评价
+        var row = $('#dg').datagrid('getSelected');
+        if(row){
+            $.messager.confirm('Confirm','您确定要删除这条评论吗？',function(f){
+                if(f){
+                    $.post('police_e/type/jason/delete/product/comment',{id:row.id},function(data){
+                            var data = eval('(' + data + ')');
+                            if(data.result == 1){
+                                $('#dg').datagrid('reload');
+                            }
+                    });
+                }
+            });
+        }else{
+            message();
+        }
+        
+    }
+
+</script>       
+<body>
+
+<!--工具栏-->
+    <div id="tb">
+         <a href="javascript:viod(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="delPj()">删除评价</a> 
+    </div>
+
+    <!--展示表单-->
+    <table id="dg" title="评价管理" class="easyui-datagrid" pagination="true" rownumbers="true"  fit="true"   singleSelect="true"  toolbar="#tb">
+        
+    </table>
+
+</body>
+</html>
