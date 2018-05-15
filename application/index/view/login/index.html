@@ -23,7 +23,7 @@
 					<div class="fontbold fontsize-20">
 						请注册加入我们吧！
 					</div>
-					<button class="btn btn-blue btn-lg goSign">立即注册</button>
+					<button class="btn btn-blue btn-lg goSign" onclick="register();">立即注册</button>
 				</div>
 				<div class="lgnForm">
 					<div class="loginTle">
@@ -32,25 +32,25 @@
 					<div class="lgn_form">
 						<div class="lgnInput clearfix">
 							<label class="fl name">账户</label>
-							<input type="text" placeholder="邮箱/手机号" class="fl" id="uName"/>
+							<input type="text" placeholder="邮箱/手机号" class="fl" id="username"/>
 						</div>
 						<div class="lgnInput clearfix">
 							<label class="fl name">密码</label>
-							<input type="text" placeholder="请输入密码" class="fl" id="uPwd"/>
+							<input type="text" placeholder="请输入密码" class="fl" id="password"/>
 						</div>
 						<div class="lgnInput clearfix">
 							<label class="fr code clearfix">
-								<img src="__IMG__/code.png" class="fl"/>
-								<h5 class="color-grey-4 fl">
+								<img src="{:url('Login/verify')}" class="fl"  width="98"  height="35"  onclick="this.src='./verify?'+Math.random();"    />
+								<!-- <h5 class="color-grey-4 fl">
 									看不清楚？<br />
 									换一张
-								</h5>
+								</h5> -->
 							</label>
-							<input type="text" placeholder="请输入验证码" class="code" id="uCode"/>
+							<input type="text" placeholder="请输入验证码" class="code" id="code"/>
 						</div>
 						<div class="lgnBtn clearfix">
 							<h5 class="fr">忘记密码？</h5>
-							<button class="btn btn-lg goLogin" id="goLogin"><span>立即登录</span></button>
+							<button class="btn btn-lg goLogin" id="goLogin" ><span>立即登录</span></button>
 						</div>
 					</div>
 				</div>
@@ -61,24 +61,37 @@
 	<script type="text/javascript" src="__JS__/layer/layer.js" ></script>
 	<script type="text/javascript" src="__JS__/common.js" ></script>
 	<script type="text/javascript">
+		function register(){
+			window.location.href="{:url('Register/index')}";
+		}
 		$(function(){
 			$("#goLogin").click(function(){
-				var uName=$("#uName").val();
-				var uPwd=$("#uPwd").val();
-				var uCode=$("#uCode").val();
-				if(uName==""||uName==null){
+				var username=$("#username").val();
+				var password=$("#password").val();
+				var code=$("#code").val();
+				if(username==""||username==null){
 					layer.msg("请输入账号");
 					return false;
 				}
-				if(uPwd==""||uPwd==null){
+				if(password==""||password==null){
 					layer.msg("请输入密码");
 					return false;
 				}
-				if(uCode==""||uCode==null){
+				if(code==""||code==null){
 					layer.msg("请输入验证码");
 					return false;
 				}
-			})
+				//以上验证通过执行POST请求
+				$.post("{:url('Login/action')}",{username:username,password:password,code:code},function(data){
+						if(data.msg == 'error'){
+							layer.msg(data.data,{icon: 5});
+						}else{
+							window.location.href="{:url('Login/ok')}";
+						}
+				});
+				
+				
+			});
 		})
 	</script>
 </body>

@@ -3,3 +3,14 @@
 		<h3>公安部科技信息化局提供运营 </h3>
 		<h4>Copyright © www.××××××.com. All right reserved.</h4>
 </div>
+<script>
+	function loginout(){
+		//退出登录
+		layer.confirm('您确定要退出登录吗？', {
+			  btn: ['确定','取消'] //按钮
+			}, function(){
+			  window.location.href="{:url('Login/out')}";
+			}, function(){
+			});
+	}
+</script>

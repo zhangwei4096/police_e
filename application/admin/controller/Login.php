@@ -53,8 +53,8 @@ class Login extends Controller{
              if ($userinfo && $userinfo['password'] == md5($data['password'])){
                  //验证通过开启全局SESSION
                  Session::set('status',$userinfo['status']);
-                 Session::set('username',$data['username']);
-                 Session::set('userid',$userinfo['userid']);
+                 Session::set('adminname',$data['username']);
+                 Session::set('adminid',$userinfo['userid']);
                  return json([
                      'msg' => 'ok'
                  ]);

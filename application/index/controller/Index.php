@@ -26,6 +26,7 @@ class Index extends Controller{
          $item.='</li>';
         }
         
+       
         
         $this->assign([
             'title'      => '首页',   //标题

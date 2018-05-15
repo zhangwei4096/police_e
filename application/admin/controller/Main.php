@@ -26,8 +26,8 @@ class Main extends Controller{
     public function out(){
         //登出
         Session::delete('status');
-        Session::delete('userid');
-        Session::delete('username');
+        Session::delete('adminid');
+        Session::delete('adminname');
         $this->success('期待您的下次登录','Login/index');
     }
     
