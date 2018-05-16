@@ -1,0 +1,80 @@
+<!--成果展示首页-->
+{include file="public/head" /}
+<body>
+	{include file="public/menu" /}
+	<div class="nBanner newsHead" style="background-image: url(__IMG__/banner3.png);">
+		<div class="mainW">
+			<div class="fontsize-48 color-white">
+				成果展示
+				<h2 class="color-white mt5">Achievement Show</h2>
+			</div>
+		</div>
+	</div>
+	<!--成果展示-->
+	<div class="searRlt mainW">
+		<div class="searMenu reMenu">
+			<ul class="clearfix">
+				<li {eq name=":request()->param('category')" value="0" } class="active"  {/eq}><a href="{:url('Product/index',['category'=>0])}">全部</a></li>
+				<li {eq name=":request()->param('category')" value="1" } class="active"  {/eq}><a href="{:url('Product/index',['category'=>1])}">刑事科学技术</a></li>
+				<li {eq name=":request()->param('category')" value="2" } class="active"  {/eq} ><a href="{:url('Product/index',['category'=>2])}">消防科学技术</a></li>
+				<li {eq name=":request()->param('category')" value="3" } class="active"  {/eq} ><a href="{:url('Product/index',['category'=>3])}">道路交通管理</a></li>
+				<li {eq name=":request()->param('category')" value="4" } class="active"  {/eq} ><a href="{:url('Product/index',['category'=>4])}">安全防范技术</a></li>
+				<li {eq name=":request()->param('category')" value="5" } class="active"  {/eq} ><a href="{:url('Product/index',['category'=>5])}">特种警用装备</a></li>
+				<li {eq name=":request()->param('category')" value="6" } class="active"  {/eq} ><a href="{:url('Product/index',['category'=>6])}">警用信息通信</a></li>
+				<li {eq name=":request()->param('category')" value="7" } class="active"  {/eq} ><a href="{:url('Product/index',['category'=>7])}">警务创意之窗</a></li>
+			</ul>
+		</div>
+		<div class="searList">
+			<h4 class="miniM">
+				您的位置：
+				<a href="index.html "><span  class="mr10">首页</span></a>
+				>
+				<span class="mrl10">成果</span>
+				>
+				<span class="color-red mrl10">{$info}</span>
+			</h4>
+			<div class="reSwiper resltList active">
+				<ul class="resUl clearfix">
+				{volist name="data" id="list" key="k"}
+            		<li {if condition="($k == 2) OR ($k == 5) "} class="mr0" {/if}>
+            			<a href="{:url('Product/more',['id'=>$list.id])}">
+            				<div class="achImg">
+            					<img src="{$list.thumb}"/>
+            				</div>
+            				<div class="resText">
+            					<h3 class="rtName ellipsis">{$list.title}</h3>
+            					<h5 class="color-grey-4 rtTime">警e网 {$list.add_time}</h5>
+	            				<h4 class="ellipsis-3 rtContenrt">{$list.recommendation}</h4>
+	            				<button class="btn btn-sm btn-blue">查看详情</button>
+            				</div>
+            			</a>
+            		</li>
+            	{/volist}
+            	</ul>
+            	<!--分页-->
+				<div class="pagebox clearfix">
+					<div class="pagesearch fr">
+						<span>共<?php echo ceil($page_total/6);?>页,到</span>
+						<input type="text" class="pcount" id="" name="" value="">
+						<span>页</span>
+						<input type="button" class="pbtn" id="" name="" value="确认">
+					</div>
+					{$page}
+				</div>
+			</div>
+		</div>
+		<!--以此类推-->
+	</div>
+	<!--footer-->
+	{include file="public/footer" /}
+	<script type="text/javascript">
+		// $(function(){
+		// 	$(".searMenu li").click(function(){
+		// 		$(this).addClass('active').siblings().removeClass('active');
+		// 		var index=$(this).index();
+		// 		$(".resltList").eq(index).addClass("active").siblings().removeClass("active");
+		// 	})
+		// })
+	</script>
+</body>
+</html>

@@ -21,7 +21,7 @@
 						<li data-id="5">特种警用装备</li>
 					</ul>
 				</div>
-				<h3 class="checkM fl color-grey-1"><a href="achieve.html">查看更多</a></h3>
+				<h3 class="checkM fl color-grey-1"><a href="{:url('Product/index',['category'=>0])}">查看更多</a></h3>
 			</div>
 			<h1>成果展示</h1>
 		</div>
@@ -31,70 +31,34 @@
 		        <div class="swiper-wrapper">
 		            <div class="swiper-slide">
 		            	<ul class="resUl">
+		            	{volist name="all_one" id="list"}
 		            		<li>
 		            			<a href="achieveText.html">
-		            				<img src="__IMG__/user/result.png"/>
+		            				<img src="{$list.thumb}"/>
 		            				<div class="resText">
-		            					<h3>发布两款改色款新品</h3>
-			            				<h4 class="ellipsis-2">回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等操作提供警告音曝光</h4>
+		            					<h3>{$list.title}</h3>
+			            				<h4 class="ellipsis-2">{$list.recommendation}</h4>
 			            				<button class="btn btn-sm btn-blue">查看详情</button>
 		            				</div>
 		            			</a>
 		            		</li>
-		            		<li>
-		            			<a href="achieveText.html">
-		            				<img src="__IMG__/user/result.png"/>
-		            				<div class="resText">
-		            					<h3>发布两款改色款新品</h3>
-			            				<h4 class="ellipsis-2">回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等操作提供警告音曝光</h4>
-			            				<button class="btn btn-sm btn-blue">查看详情</button>
-		            				</div>
-		            			</a>
-		            		</li>
-		            		<li>
-		            			<a href="achieveText.html">
-		            				<img src="__IMG__/user/result.png"/>
-		            				<div class="resText">
-		            					<h3>发布两款改色款新品</h3>
-			            				<h4 class="ellipsis-2">回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等操作提供警告音曝光</h4>
-			            				<button class="btn btn-sm btn-blue">查看详情</button>
-		            				</div>
-		            			</a>
-		            		</li>
+		            	{/volist}
 		            	</ul>
 		            </div>
 		            <div class="swiper-slide">
 		            	<ul class="resUl">
+		            	{volist name="all_two" id="list"}
 		            		<li>
 		            			<a href="achieveText.html">
-		            				<img src="__IMG__/user/result.png"/>
+		            				<img src="{$list.thumb}"/>
 		            				<div class="resText">
-		            					<h3>发布两款改色款新品</h3>
-			            				<h4 class="ellipsis-2">回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等操作提供警告音曝光</h4>
+		            					<h3>{$list.title}</h3>
+			            				<h4 class="ellipsis-2">{$list.recommendation}</h4>
 			            				<button class="btn btn-sm btn-blue">查看详情</button>
 		            				</div>
 		            			</a>
 		            		</li>
-		            		<li>
-		            			<a href="achieveText.html">
-		            				<img src="__IMG__/user/result.png"/>
-		            				<div class="resText">
-		            					<h3>发布两款改色款新品</h3>
-			            				<h4 class="ellipsis-2">回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等操作提供警告音曝光</h4>
-			            				<button class="btn btn-sm btn-blue">查看详情</button>
-		            				</div>
-		            			</a>
-		            		</li>
-		            		<li>
-		            			<a href="achieveText.html">
-		            				<img src="__IMG__/user/result.png"/>
-		            				<div class="resText">
-		            					<h3>发布两款改色款新品</h3>
-			            				<h4 class="ellipsis-2">回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等操作提供警告音曝光</h4>
-			            				<button class="btn btn-sm btn-blue">查看详情</button>
-		            				</div>
-		            			</a>
-		            		</li>
+		            	{/volist}
 		            	</ul>
 		            </div>
 		        </div>
@@ -111,26 +75,19 @@
 		        <div class="swiper-wrapper">
 		            <div class="swiper-slide">
 		            	<ul class="resUl">
+		            	{volist name="one" id="list"}
 		            		<li>
 		            			<a href="achieveText.html">
-		            				<img src="__IMG__/user/result.png"/>
+		            				<img src="{$list.thumb}"/>
 		            				<div class="resText">
-		            					<h3>发布两款改色款新品</h3>
-			            				<h4 class="ellipsis-2">回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等操作提供警告音曝光</h4>
+		            					<h3>{$list.title}</h3>
+			            				<h4 class="ellipsis-2">{$list.recommendation}</h4>
 			            				<button class="btn btn-sm btn-blue">查看详情</button>
 		            				</div>
 		            			</a>
 		            		</li>
-		            		<li>
-		            			<a href="achieveText.html">
-		            				<img src="__IMG__/user/result.png"/>
-		            				<div class="resText">
-		            					<h3>发布两款改色款新品</h3>
-			            				<h4 class="ellipsis-2">回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等操作提供警告音曝光</h4>
-			            				<button class="btn btn-sm btn-blue">查看详情</button>
-		            				</div>
-		            			</a>
-		            		</li>
+		            	{/volist}
+		            		
 		            	</ul>
 		            </div>
 		        </div>
@@ -139,7 +96,8 @@
         			暂无内容
         		</div>
 			</div>
-		</div><!--刑事科学技术-->
+		</div>
+		<!--刑事科学技术-->
 
 
 
@@ -149,16 +107,18 @@
 		        <div class="swiper-wrapper">
 		            <div class="swiper-slide">
 		            	<ul class="resUl">
+		            	{volist name="two" id="list"}
 		            		<li>
 		            			<a href="achieveText.html">
-		            				<img src="__IMG__/user/result.png"/>
+		            				<img src="{$list.thumb}"/>
 		            				<div class="resText">
-		            					<h3>发布两款改色款新品</h3>
-			            				<h4 class="ellipsis-2">回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等操作提供警告音曝光</h4>
+		            					<h3>{$list.title}</h3>
+			            				<h4 class="ellipsis-2">{$list.recommendation}</h4>
 			            				<button class="btn btn-sm btn-blue">查看详情</button>
 		            				</div>
 		            			</a>
 		            		</li>
+		            	{/volist}
 		            	</ul>
 		            </div>
 		        </div>
@@ -174,14 +134,30 @@
 		<div class="resList resList-4">
 			<div class="swiper-container reSwiper">
 		        <div class="swiper-wrapper">
-		         
+		         	<div class="swiper-slide">
+		            	<ul class="resUl">
+		            	{volist name="three" id="list"}
+		            		<li>
+		            			<a href="achieveText.html">
+		            				<img src="{$list.thumb}"/>
+		            				<div class="resText">
+		            					<h3>{$list.title}</h3>
+			            				<h4 class="ellipsis-2">{$list.recommendation}</h4>
+			            				<button class="btn btn-sm btn-blue">查看详情</button>
+		            				</div>
+		            			</a>
+		            		</li>
+		            	{/volist}
+		            	</ul>
+		            </div>
 		        </div>
 		    	<div class="pagination"></div>
-		    	<div class="noneInfo">
+		    	<div class="noneInfo" style="display: none;">
         			暂无内容
         		</div>
 			</div>
-		</div><!--道路交通管理-->
+		</div>
+		<!--道路交通管理-->
 
 
 		<!--安全防范技术-->
@@ -190,26 +166,18 @@
 		        <div class="swiper-wrapper">
 		            <div class="swiper-slide">
 		            	<ul class="resUl">
+		            	{volist name="four" id="list"}
 		            		<li>
 		            			<a href="achieveText.html">
-		            				<img src="__IMG__/user/result.png"/>
+		            				<img src="{$list.thumb}"/>
 		            				<div class="resText">
-		            					<h3>发布两款改色款新品</h3>
-			            				<h4 class="ellipsis-2">回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等操作提供警告音曝光</h4>
+		            					<h3>{$list.title}</h3>
+			            				<h4 class="ellipsis-2">{$list.recommendation}</h4>
 			            				<button class="btn btn-sm btn-blue">查看详情</button>
 		            				</div>
 		            			</a>
 		            		</li>
-		            		<li>
-		            			<a href="achieveText.html">
-		            				<img src="__IMG__/user/result.png"/>
-		            				<div class="resText">
-		            					<h3>发布两款改色款新品</h3>
-			            				<h4 class="ellipsis-2">回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等操作提供警告音曝光</h4>
-			            				<button class="btn btn-sm btn-blue">查看详情</button>
-		            				</div>
-		            			</a>
-		            		</li>
+		            	{/volist}
 		            	</ul>
 		            </div>
 		        </div>
@@ -225,10 +193,25 @@
 		<div class="resList resList-6">
 			<div class="swiper-container reSwiper">
 		        <div class="swiper-wrapper">
-		         
+		         	<div class="swiper-slide">
+		            	<ul class="resUl">
+		            	{volist name="five" id="list"}
+		            		<li>
+		            			<a href="achieveText.html">
+		            				<img src="{$list.thumb}"/>
+		            				<div class="resText">
+		            					<h3>{$list.title}</h3>
+			            				<h4 class="ellipsis-2">{$list.recommendation}</h4>
+			            				<button class="btn btn-sm btn-blue">查看详情</button>
+		            				</div>
+		            			</a>
+		            		</li>
+		            	{/volist}
+		            	</ul>
+		            </div>
 		        </div>
 		    	<div class="pagination"></div>
-		    	<div class="noneInfo">
+		    	<div class="noneInfo" style="display: none;">
         			暂无内容
         		</div>
 			</div>

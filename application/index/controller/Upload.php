@@ -9,7 +9,7 @@ class Upload extends Controller{
         $file = request()->file('image');
         
         // 移动到框架应用根目录/public/uploads/ 目录下
-        if($file){
+         if($file){
             $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
             if($info){
                 // 成功上传后 获取上传信息
@@ -30,8 +30,17 @@ class Upload extends Controller{
             }
         }
         
-        return json($rs);
-        
+        return json($rs); 
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }

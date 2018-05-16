@@ -1,0 +1,320 @@
+{include file="public/head" /}
+<!--科技人 成果发布页面-->
+<body>
+<style>
+	.diy {
+		display: none;
+	}
+</style>
+	{include file="public/menu" /}
+	<div class="nBanner newsHead" style="background-image: url(__IMG__/banner6.png);">
+		<div class="mainW">
+			<div class="fontsize-48 color-white">
+				{$title}
+				<h2 class="color-white mt5">Release</h2>
+			</div>
+		</div>
+	</div>
+	<!--发布成果-->
+	<div class="searRlt mainW">
+		<div class="searMenu reMenu">
+			<ul class="clearfix">
+				<li {eq name=":request()->param('type')" value="1" } class="active"  {/eq}><a href="{:url('Release/index',['type'=>1])}">发布成果</a></li>
+				<li {eq name=":request()->param('type')" value="2" } class="active"  {/eq} ><a href="{:url('Release/index',['type'=>2])}">发布科技人</a></li>
+				<!-- <li {eq name=":request()->param('type')" value="3" } class="active"  {/eq} ><a href="{:url('Release/index',['type'=>3])}">发布问题</a></li> -->
+			</ul>
+		</div>
+		<div class="searList">
+			<h4 class="miniM">
+				您的位置：
+				<a href="index.html"><span  class="mr10">首页</span></a>
+				>
+				<a href="release.html"><span class="mrl10">发布</span></a>
+				>
+				<span class="color-red mrl10">{$title}</span>
+			</h4>
+			<div class="releaForm mt18">
+				<!--基本信息-->
+ 				<form id="fm" method="post"  enctype="multipart/form-data" onsubmit="return false;">   
+					<div class="release">
+						<div class="releaTle">
+							基本信息
+						</div>
+						<div class="relea_txt">
+							<div class="releaIpt">
+								<div class="maxLen">50</div>
+								<input type="text" name="title" placeholder="请输入标题..." maxlength="50"/>
+							</div>
+							
+							<div class="releaIpt mt22">
+								<div class="maxLen">50</div>
+								<input type="text" name="recommendation" placeholder="请输入简要说明..." maxlength="50"/>
+							</div>
+							<!--科技人没有分类-->
+							{switch name=":request()->param('type')"}
+								{case value="1"} 
+								<div class="releaIpt mt22" >
+									<select name="category" style="margin-top:15px; ">
+										<option value="刑事科学技术">刑事科学技术</option>
+										<option value="消防科学技术">消防科学技术</option>
+										<option value="道路交通管理">道路交通管理</option>
+										<option value="安全防范技术">安全防范技术</option>
+										<option value="特种警用装备">特种警用装备</option>
+                                        <option value="警用信息通信">警用信息通信</option>
+                                        <option value="警务创意之窗">警务创意之窗</option>
+									</select>								
+								</div>
+								{/case}
+							{/switch}
+							<div class="releaIpt mt22">
+								<div class="maxLen">2000</div>
+								<textarea id="editor" name="content" style="height: 400px;" maxlength="2000"></textarea>
+								<!--成果说明内容-->
+							</div>
+						</div>
+					</div>
+					<!--参数设置 科技人是没有参数的-->
+					{switch name=":request()->param('type')"}
+								{case value="1"}
+							<div class="release">
+								<div class="releaTle">
+									参数设置
+								</div>
+								<div class="relea_txt">
+									<div class="releaData clearfix pb16" id="dataOne">
+										<div class="releaIpt clearfix fl">
+											<input type="text" placeholder="参数名称" name="param_name[]" class="fl w178"/>
+											<div class="maxLen">200</div>
+											<input type="text" placeholder="参数值" name="param_value[]" class="fl w707" maxlength="200"/>
+										</div>
+										<div class="addBtn fl ml22" id="addBtn"></div>
+									</div>
+									<div class="releaData clearfix pb16" style="display: none;" id="releaData">
+										<div class="releaIpt clearfix fl">
+											<input type="text" placeholder="参数名称" name="param_name[]" class="fl w178"/>
+											<div class="maxLen">200</div>
+											<input type="text" placeholder="参数值" name="param_value[]" class="fl w707" maxlength="200"/>
+										</div>
+										<div class="deleIcon fl"></div>
+									</div>
+								</div>
+							</div>
+						{/case}
+					{/switch}
+					<!--上传成果-->
+					<!-- <div class="release">
+						<div class="releaTle">
+							上传成果
+						</div>
+						<div class="relea_txt">
+							上传视频
+							<div class="releaVideo">
+								<h4>
+									<span class="fontsize-15 videoTle color-grey-5">上传视频</span>提示文字提示文字提示文字，提示文字提示文字提示文字提示文字提示文字
+								</h4>
+								<div class="videoBtn">
+									<button class="btn btn-blue-1 btn-lgg video_up mr10"><span>上传视频</span></button>
+									<button class="btn btn-blue btn-lgg online_up"><span>插入在线视频</span></button>
+								</div>
+								<div class="videoName color-grey-5">
+									<ul>
+										<li>
+											<div class="deleIcon fr"></div>
+											<div class="clearfix">
+												<div class="ellipsis fl vName">http://www.iconfont.cn/search/index/dhadha.html</div>
+												<div class="fl">导入成功</div>
+											</div>
+										</li>
+										<li>
+											<div class="deleIcon fr"></div>
+											<div class="clearfix">
+												<div class="ellipsis fl vName">2d4e75ecd4e75ec437103c029a140a14dd111437103c029a140a14dd111.mp4</div>
+												<div class="fl">上传成功</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>上传视频
+							
+						</div>
+					</div> -->
+					<!--上传封面-->
+					<div class="release">
+						<div class="releaTle">
+							上传封面
+						</div>
+						<div class="relea_txt">
+							<div class="upphoto clearfix upPto">
+								<div class="fl upload">
+									<input name="image" type="file" onchange="uploadPic()"   accept="image/*" />
+										<div class="upTxt">
+										<img src="__IMG__/addImg.png"/>
+										<h4 class="color-grey-5 mt10">上传封面</h4>
+									</div>
+								</div>
+								<ul class="photoList clearfix fl">
+									<li>
+										<div class="deleIcon"></div>
+										<img id="thumb" />
+										<input type="hidden" name="thumb" />
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="releaseBtn">
+						<input type="hidden" name="type" value="{:request()->param('type')}" />
+						<button class="btn btn-red-1" onclick="send();">发布</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--footer-->
+
+	{include file="public/footer" /}
+	<!--footer-->
+
+<script charset="utf-8" src="/static/kindeditor/kindeditor-all.js"></script>
+<script charset="utf-8" src="/static/kindeditor/lang/zh-CN.js"></script>
+<script type="text/javascript">
+ $(function () {
+	 
+        //详情编辑器
+        KindEditor.ready(function (K) {
+            this.editor
+                = K.create('textarea[id="editor"]', {
+                afterBlur: function () { this.sync(); },
+                items: ['source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+                    'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                    'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                    'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                    'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                    'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'multiimage',
+                    'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+                    'anchor', 'link', 'unlink'],
+                uploadJson: '/static/kindeditor/php/upload_json.php',//指定上传图片的服务器端程序
+                fileManagerJson: '/static/kindeditor/php/file_manager_json.php',//指定浏览远程图片的服务器端程序
+                allowFileManager: true,
+                
+            });
+        });
+        
+        //限制textarea字数在2000字以内
+			$(".releaIpt textarea").on("input propertychange", function(e) {  
+		        var $this = $(this),_val=$this.val();
+		        if (_val.length >2000) {  
+		         	layer.msg("最多输入2000个字");
+		            $this.val(_val.substring(0, 2000));  
+		        } 
+		    }); 
+		    //添加参数设置
+		    $("#addBtn").click(function(){
+		    	var parent=$(this).parents(".relea_txt");
+		    	var aText=$("#releaData").html();
+		    	var aDiv=$("<div/>").addClass("releaData clearfix pb16");
+		    	aDiv.html(aText);
+		    	aDiv.insertAfter($("#dataOne"));
+		    })
+		    //删除参数设置
+		    $(document).on("click",".releaData .deleIcon",function(){
+		    	var parent=$(this).parents(".releaData");
+		    	parent.remove();
+		    })
+		    //删除视频
+		    $(document).on("click",".videoName .deleIcon",function(){
+		    	var parent=$(this).parents("li");
+		    	parent.remove();
+		    })
+		    //隐藏图片
+		    $(document).on("click",".photoList .deleIcon",function(){
+		    	var parent=$(this).parents("li");
+		    	parent.addClass("diy");
+		    	//并且清除thumb的value值
+		    	$('input[name="thumb"]').val('');
+		    });
+
+
+
+    });
+
+
+ function send(){
+ 	//提交首先检查必填参数是否设置
+ 	var title   = $('input[name="title"]').val();
+ 	var content = editor.html(); 
+ 	var thumb   = $('input[name=thumb]').val();
+ 	var recommendation = $('input[name="recommendation"]').val();
+ 	if (title==""||title==null) {
+ 		layer.msg("请输入标题");
+		return false;
+ 	}
+
+ 	if (recommendation==""||recommendation==null) {
+ 		layer.msg("请输入简要说明");
+ 		return false;
+ 	}
+
+ 	if (content==""||content==null) {
+ 		layer.msg("请输入内容");
+		return false;
+ 	}
+
+ 	if (thumb==""||thumb==null) {
+ 		layer.msg("请选择封面图片");
+		return false;
+ 	}
+
+ 	$.ajax({
+           
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "{:url('Release/dataAction')}" ,//url
+                data: $('#fm').serialize(),
+                content:editor.html(),
+                success: function (data) {
+                    if (data.msg == 'ok') {
+                        //添加成功
+                        layer.alert(data.data, {icon: 6});
+					    //执行页面跳转
+					    
+                    }else{
+                    	//添加失败
+                    	layer.msg('添加失败');
+                    };
+                    
+                },
+                error : function() {
+                    layer.msg('服务器异常,请稍后重试');
+                }
+            });
+
+ }
+
+
+  function uploadPic() {  
+        //图片回调
+        var options = {  
+                // 规定把请求发送到那个URL  
+                url: "{:url('Upload/img')}",  
+                // 请求方式  
+                type: "post",  
+                // 服务器响应的数据类型  
+                dataType: "json",  
+                // 请求成功时执行的回调函数  
+                success: function(data, status, xhr) {  
+                    // 图片显示地址  
+                    if($("#thumb").parent().hasClass('diy')){
+                    	$("#thumb").parent().removeClass('diy');
+                    }
+                    $("#thumb").attr("src", data.path);  
+                    $('input[name="thumb"]').val(data.path);
+                }  
+        };  
+          
+        $("#fm").ajaxSubmit(options);  
+    }  
+        
+ </script>
+</body>
+</html>
