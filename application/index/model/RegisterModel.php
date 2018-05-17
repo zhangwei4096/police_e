@@ -79,7 +79,7 @@ class RegisterModel extends Model{
             if ($user->save($info)){
                 $result = [
                     'msg' => 'ok',
-                    'data' => '恭喜您已经成功注册,待管理审核通过后就可以正常使用了'
+                    'data' => '恭喜您已经成功注册,待管理员审核通过后就可以正常使用了'
                 ];
                 return $result;
             }                

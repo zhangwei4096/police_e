@@ -2,6 +2,7 @@
 namespace app\json\model;
 
 use think\Model;
+use think\Db;
 class UserModel extends Model{
     
     protected $table = 'police_user';
@@ -10,12 +11,14 @@ class UserModel extends Model{
     protected $createTime   = false;
     
     public function lists(){
-        
+        //审核通过了的用户
         $result = [
             'result' => 1,
             'total'  => $this->count(),
             'message'    => 'ok',
-            'rows'   => $this->all()
+            'rows'   => UserModel::all(function($query){
+                    $query->where('audit_flag', '1');
+            })
         ];
         
         return $result;
@@ -26,7 +29,9 @@ class UserModel extends Model{
             'result' => 1,
             'total'  => 1,
             'message'    => 'ok',
-            'rows'   => $this->all(['username'=>$username])
+            //模糊查询
+            'rows'   => Db::name('user')->where('username','like',"%{$username}%")->select()
+           
         ];
         return $result;
     }

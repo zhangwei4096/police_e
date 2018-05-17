@@ -15,7 +15,7 @@ class ProductModel extends Model{
             'result' => 1,
             'total'  => $this->count(),
             'message'    => 'ok',
-            'rows'   => $this->all()
+            'rows'   =>  Db::name('product')->order('add_time desc')->select()
         ];
         
         return $result;

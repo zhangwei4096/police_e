@@ -16,17 +16,17 @@ class NewsModel extends Model{
             'result' => 1,
             'total'  => $this->count(),
             'message'    => 'ok',
-            'rows'   => $this->all()
+            'rows'   => Db::name('news')->order('add_time desc')->select()
         ];
         
         return $result;
     }
     
     public function queryKey($key){
-        $news = Db::table('police_news')->where('title','like',"%{$key}%")->select();
+        $news = Db::name('news')->where('title','like',"%{$key}%")->order('add_time desc')->select();
         $result = [
             'result' => 1,
-            'total'  => Db::table('police_news')->where('title','like',"%{$key}%")->count(),
+            'total'  => Db::name('news')->where('title','like',"%{$key}%")->count(),
             'message'    => 'ok',
             'rows'   => $news
             ];
