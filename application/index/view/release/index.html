@@ -1,6 +1,8 @@
 {include file="public/head" /}
 <!--科技人 成果发布页面-->
 <body>
+<script charset="utf-8" src="/static/kindeditor/kindeditor-all.js"></script>
+<script charset="utf-8" src="/static/kindeditor/lang/zh-CN.js"></script>
 <style>
 	.diy {
 		display: none;
@@ -27,9 +29,9 @@
 		<div class="searList">
 			<h4 class="miniM">
 				您的位置：
-				<a href="index.html"><span  class="mr10">首页</span></a>
+				<a href="{:url('Index/index')}"><span  class="mr10">首页</span></a>
 				>
-				<a href="release.html"><span class="mrl10">发布</span></a>
+				<a href="{:url('Release/index',['type'=>1])}"><span class="mrl10">发布</span></a>
 				>
 				<span class="color-red mrl10">{$title}</span>
 			</h4>
@@ -102,42 +104,35 @@
 						{/case}
 					{/switch}
 					<!--上传成果-->
-					<!-- <div class="release">
+					<div class="release">
 						<div class="releaTle">
 							上传成果
 						</div>
-						<div class="relea_txt">
-							上传视频
+						<div class="relea_txt">							
 							<div class="releaVideo">
 								<h4>
-									<span class="fontsize-15 videoTle color-grey-5">上传视频</span>提示文字提示文字提示文字，提示文字提示文字提示文字提示文字提示文字
+									<span class="fontsize-15 videoTle color-grey-5">上传视频</span>
 								</h4>
 								<div class="videoBtn">
-									<button class="btn btn-blue-1 btn-lgg video_up mr10"><span>上传视频</span></button>
-									<button class="btn btn-blue btn-lgg online_up"><span>插入在线视频</span></button>
+									<input type="file" name="video" accept="video/*" class="btn btn-blue-1 btn-lgg video_up mr10" onchange="upload();" />
+									<button class="btn btn-blue btn-lgg online_up" onclick="insert();"><span>插入在线视频</span></button>
 								</div>
 								<div class="videoName color-grey-5">
 									<ul>
-										<li>
+										<li class="diy">
 											<div class="deleIcon fr"></div>
 											<div class="clearfix">
-												<div class="ellipsis fl vName">http://www.iconfont.cn/search/index/dhadha.html</div>
-												<div class="fl">导入成功</div>
-											</div>
-										</li>
-										<li>
-											<div class="deleIcon fr"></div>
-											<div class="clearfix">
-												<div class="ellipsis fl vName">2d4e75ecd4e75ec437103c029a140a14dd111437103c029a140a14dd111.mp4</div>
-												<div class="fl">上传成功</div>
+												<div id="videourl" class="ellipsis fl vName"></div>
+												<div  class="fl"></div>
 											</div>
 										</li>
 									</ul>
 								</div>
-							</div>上传视频
+
+							</div>
 							
 						</div>
-					</div> -->
+					</div> 
 					<!--上传封面-->
 					<div class="release">
 						<div class="releaTle">
@@ -164,6 +159,7 @@
 					</div>
 					<div class="releaseBtn">
 						<input type="hidden" name="type" value="{:request()->param('type')}" />
+                        <input type="hidden" name="short_video" />
 						<button class="btn btn-red-1" onclick="send();">发布</button>
 					</div>
 				</form>
@@ -175,9 +171,9 @@
 	{include file="public/footer" /}
 	<!--footer-->
 
-<script charset="utf-8" src="/static/kindeditor/kindeditor-all.js"></script>
-<script charset="utf-8" src="/static/kindeditor/lang/zh-CN.js"></script>
+
 <script type="text/javascript">
+
  $(function () {
 	 
         //详情编辑器
@@ -224,7 +220,8 @@
 		    //删除视频
 		    $(document).on("click",".videoName .deleIcon",function(){
 		    	var parent=$(this).parents("li");
-		    	parent.remove();
+		    	parent.addClass('diy');
+                $('input[name="short_video"]').val('');
 		    })
 		    //隐藏图片
 		    $(document).on("click",".photoList .deleIcon",function(){
@@ -245,6 +242,7 @@
  	var content = editor.html(); 
  	var thumb   = $('input[name=thumb]').val();
  	var recommendation = $('input[name="recommendation"]').val();
+    var short_video = $('input[name=short_video]').val();
  	if (title==""||title==null) {
  		layer.msg("请输入标题");
 		return false;
@@ -259,6 +257,11 @@
  		layer.msg("请输入内容");
 		return false;
  	}
+
+    if (short_video==""||short_video==null) {
+        layer.msg("请上传视频或输入视频地址");
+        return false;
+    }
 
  	if (thumb==""||thumb==null) {
  		layer.msg("请选择封面图片");
@@ -277,7 +280,7 @@
                         //添加成功
                         layer.alert(data.data, {icon: 6});
 					    //执行页面跳转
-					    
+					    window.location.href="{:url('Index/index')}";
                     }else{
                     	//添加失败
                     	layer.msg('添加失败');
@@ -314,7 +317,41 @@
           
         $("#fm").ajaxSubmit(options);  
     }  
+      
+      function insert() {
+        //插入视频URL地址
+          layer.prompt({title: '请输入视频URL地址', formType: 3}, function(text, index){
+            layer.close(index);
+            $('#videourl').parents().removeClass('diy');
+            $('#videourl').html(text); //展示输入的视频地址
+            $('#videourl').next().html('导入成功');
+            $('input[name="short_video"]').val(text);
+          });
         
+    }
+
+    function upload() {
+         var options = {  
+                // 规定把请求发送到那个URL  
+                url: "{:url('Upload/video')}",  
+                // 请求方式  
+                type: "post",  
+                // 服务器响应的数据类型  
+                dataType: "json",  
+                // 请求成功时执行的回调函数  
+                success: function(data, status, xhr) {  
+                    // 图片显示地址  
+                    $('#videourl').parents().removeClass('diy');
+                    $('#videourl').html(data.path);
+                    $('#videourl').next().html('上传成功');
+                    $('input[name="short_video"]').val(data.path);
+                }  
+        };  
+          
+        $("#fm").ajaxSubmit(options);  
+    }
+  
+
  </script>
 </body>
 </html>

@@ -115,7 +115,7 @@
                     {$product.content}
                     <!--文章视频开始-->
                     <div class="achiVideo" {if condition="($product.short_video == null) "} style="display:none;" {/if}>
-                        <video id="my-video" class="video-js" x-webkit-airplay="allow" webkit-playsinline controls poster="images/user/poster.png" preload="auto"  data-setup="{}" width="827" height="434">
+                        <video id="my-video" class="video-js" x-webkit-airplay="allow" webkit-playsinline controls poster="{$product.thumb}" preload="auto"  data-setup="{}" width="827" height="434">
                             <source src="{$product.short_video}" type="video/mp4"></source>
                         </video>
                         <button class="palyNow" id="palyBtn"></button>

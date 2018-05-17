@@ -35,7 +35,34 @@ class Upload extends Controller{
     
     
     
-    
+    public function video(){
+        //视频上传
+        $file = request()->file('video');
+        
+        if($file){
+            $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+            if($info){
+                // 成功上传后 获取上传信息
+                $path = '/uploads/'.str_replace('\\','/',$info->getsaveName()); //返回视频的绝对路径
+                $rs   = [
+                    'result' => 1,
+                    'msg'    => 'ok',
+                    'path'   => $path
+                ];
+                
+            }else{
+                // 上传失败获取错误信息
+                $rs = [
+                    'result' => 2,
+                    'msg'    => $file->getError()
+                ];
+                
+            }
+        }
+        
+        return json($rs); 
+        
+    }
     
     
     

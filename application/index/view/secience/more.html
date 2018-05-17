@@ -102,7 +102,7 @@
                     {if condition="($data['short_video'])"}
 
                         <div class="achiVideo">
-                            <video id="my-video" class="video-js" x-webkit-airplay="allow" webkit-playsinline controls poster="__IMG__/user/poster.png" preload="auto"  data-setup="{}" width="827" height="434">
+                            <video id="my-video" class="video-js" x-webkit-airplay="allow" webkit-playsinline controls poster="{$data.thumb}" preload="auto"  data-setup="{}" width="827" height="434">
                                 <source src="{$data.short_video}" type="video/mp4"></source>
                             </video>
                             <button class="palyNow" id="palyBtn"></button>

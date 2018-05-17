@@ -27,6 +27,7 @@ class RegisterModel extends Model{
                 'password'  => 'require|confirm', //password_confirm
                 'email'         => 'email',
                 'mobile'       => 'number|max:11',
+               
             ];
             
             $message = [

@@ -19,6 +19,7 @@ class ProductModel extends Model{
         $rules = [
             'title'         => 'require|max:50',
             'content'   => 'require|max:2000',
+            'short_video' => 'require',
             'thumb'     => 'require'
         ];
         

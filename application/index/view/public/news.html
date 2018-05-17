@@ -1,10 +1,10 @@
-<!--news-->
+news-->
 	<div class="newsList" style="background-image: url(__IMG__/banner.png);">
 		<div class="mainW">
 			<div class="newsInner clearfix">
 				<div class="swiper-container newsSwiper fl">
 			        <div class="swiper-wrapper">
-			        {volist name="banner" id="list" }
+			        {volist name="data" id="list" }
 			            <div class="swiper-slide" style="background: url({$list.thumb}) no-repeat top center ;">
 			            	<div class="bannrText color-white">
 				        		<div class="fontsize-43">消防布控系统</div>
@@ -36,30 +36,34 @@
 	        	<div class="swiper-button-prev"></div>
 			    <div class="newsText fl">
 					<div class="newsTle">
-						<a href="{:url('News/index')}"><div class="moreBtn fr"></div></a>
+						<a href="{:url('News/index',['category'=>0])}"><div class="moreBtn fr"></div></a>
 						<h1 class="color-grey-1">科技资讯</h1>
 					</div>
 					<div class="nsList color-grey">
 						<ul>
-							{$news}
-								<!--<a href="achieveText.html">
+							
+							{volist name="data" id="list" key="k"}
+							<li>
+								<a href="{:url('News/more',['id'=>$list['id']])}">
 									<div class="moreRead">
 										<div class="moreR">
 											Read More
 										</div>
 									</div>
 									<div class="newsTime">
-										<h5><span class="ntData">07</span>/<span class="ntData">22</span></h5>
+										<h5><span class="ntData"><?php echo date('m',strtotime($list['add_time']));?></span>/<span class="ntData"><?php echo date('d',strtotime($list['add_time']));?></span></h5>
 									</div>
 									<div class="ellipsis nslText">
-										美媒：马航机长曾用模拟软件演练自杀飞行路线飞行行路软件演练自杀飞行路线飞行行路
+										{$list.title}
 									</div>
 								</a>
-							</li> -->
+							</li>
+							{/volist}
+
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!--news-end-->
+	<!--news-end
