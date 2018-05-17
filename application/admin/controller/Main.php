@@ -4,11 +4,13 @@ use think\Controller;
 use think\Request;
 use think\Session;
 use app\admin\model\LogModel;
+use app\json\model\UserModel;
+use think\Db;
 class Main extends Controller{
     
     public function _initialize(){
      header("Content-type:text/html;charset=utf-8");
-        if(!session('status')){
+        if(!session::get('status')){
             //记录非法登录用户的IP地址
             $request = Request::instance();
             LogModel::insertLog('有一个用非法访问后台地址',$request->ip());
@@ -42,5 +44,22 @@ class Main extends Controller{
             return view('view/'.$action);
         }
     }
+    
+    public function editPwd(){
+        //超级用户密码修改
+        $data['userid']      = Session::get('adminid'); //获取用户ID
+        $data['password'] = md5(Request::instance()->post('newPwd'));
+        
+        $user = Db::name('user')->update($data);
+       
+        if ($user){
+             return json([
+                 'msg' =>'ok',
+                 'data' =>''
+             ]);
+         }
+        
+    }
+    
     
 }

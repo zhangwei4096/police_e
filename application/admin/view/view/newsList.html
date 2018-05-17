@@ -31,7 +31,7 @@
     	
         $('#dg').datagrid({
             //显示所有新闻
-            url:'/json/News',
+            url:"{:url('/json/News/index')}",
             columns:[[
                 {field:'id',title:'id',width:'50',align:'center',hidden:'true'},
                 {field:'title',title:'标题',width:'550',align:'center'},

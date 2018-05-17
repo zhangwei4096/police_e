@@ -3,7 +3,8 @@
     <title>成果管理</title>
 </head>
 <script>
-    function openPj(){
+
+/* function openPj(){
         //开启评价
         $.messager.confirm('Confirm','您确定要开启评价功能吗？',function(f){
             if(f){
@@ -34,7 +35,7 @@
             }
         });
     }
-
+ */
     
     function gainExport(){
         //导出成果
@@ -63,7 +64,7 @@
     $(function(){
 
          $('#dg').datagrid({
-            url:'/json/Product/query',
+            url:"{:url('/json/Product/query')}",
             columns:[[
                 {field:'id',title:'id',width:'50',align:'center'},
                 {field:'title',title:'标题',width:'200',align:'center'},

@@ -10,7 +10,7 @@
             $.messager.confirm('Confirm','确定审核通过 '+row.username+' 此用户？',function(f){
                 if (f) {
                     //执行POST请求
-                    $.post('/json/User/approve',{userid:row.userid},function(data){
+                    $.post("{:url('/json/User/approve')}",{userid:row.userid},function(data){
                             // var data = eval('(' + data + ')');
                          if(data.result == 1){
                            $('#dg').datagrid('reload');

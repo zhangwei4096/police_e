@@ -7,7 +7,7 @@
         //添加角色ID
         $('#dlg').dialog('open').dialog('center').dialog('setTitle','角色添加');
         $('#fm').form('clear');
-        url = '/json/Role/add';
+        url = "{:url('/json/Role/add')}";
     }
 
     function saveRole(){
@@ -36,7 +36,7 @@
         if(row){
             $.messager.confirm('Confirm','确定删除 '+row.role_id+' 此角色?',function(f){
                 if(f){
-                    $.post('/json/Role/delete',{id:row.id},function(data){
+                    $.post("{:url('/json/Role/delete')}",{id:row.id},function(data){
                         // var data = eval('(' + data + ')');
                         if(data.result == 1){
                             //删除成功
@@ -67,7 +67,7 @@
 
     <!-- 查询表单 --> 
 
-    <table id="dg" title="角色管理" class="easyui-datagrid" style="width:550px;height:250px"  pagination="true" rownumbers="true" fit="true"   url="/json/Role" singleSelect="true"  toolbar="#tb">
+    <table id="dg" title="角色管理" class="easyui-datagrid" style="width:550px;height:250px"  pagination="true" rownumbers="true" fit="true"   url="{:url('/json/Role/index')}" singleSelect="true"  toolbar="#tb">
          <thead>
 
                 <tr>

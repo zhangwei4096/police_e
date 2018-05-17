@@ -38,7 +38,7 @@
            
 
         $('#dg').datagrid({
-            url: '/json/News',
+            url: "{:url('/json/News/index')}",
             columns:[[
 
                 {field:'id',title:'id',hidden:'true'},
@@ -91,7 +91,7 @@
                 options.attr("selected", false);
                 options.first().attr("selected", true);
             });
-        url = '/json/News/add'; 
+        url = "{:url('/json/News/add')}"; 
     }
 
 
@@ -104,7 +104,7 @@
             $("#allUrl").attr("src",row.thumb);  
             $('#fm').form('load',row);
             editor.html(row.content);  //加载数据
-            url = '/json/News/update/id/'+row.id;
+            url = "{:url('/json/News/update')}?id="+row.id;
         }else{
             message();
         }
@@ -140,7 +140,7 @@
         if(row){
             $.messager.confirm('Confirm','您确定要删除 '+row.title+' 这篇新闻吗?',function(f){
                if(f){
-            	   $.post('/json/News/delete',{id:row.id},function(data){
+            	   $.post("{:url('/json/News/delete')}",{id:row.id},function(data){
                        // var data = eval('(' + data + ')');
                        if (data.result == 1) {
                            message('当前新闻删除成功');
@@ -192,7 +192,7 @@
         // 上传设置  
         var options = {  
                 // 规定把请求发送到那个URL  
-                url: "/index/Upload/img",  
+                url: "{:url('/index/Upload/img')}",  
                 // 请求方式  
                 type: "post",  
                 // 服务器响应的数据类型  

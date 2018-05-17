@@ -86,15 +86,16 @@
 	//修改密码
 	function modifyPassword(){
 		$("#fm").form("submit",{
-			url:url,
+			url:"{:url('Main/editPwd')}",
 			onSubmit:function(){
 				if(!$(this).form("validate")){
 					return false;
 				}
 				return true;
 			},
-			success:function(result){
-				if(res.code == '0000'){
+			success:function(data){
+				var data = eval('(' + data + ')');
+			 	if(data.msg == 'ok'){
 					$.messager.alert("系统提示","密码修改成功,下一次登录生效","info",function(){
 						closePasswordModifyDialog();
 					});
@@ -103,7 +104,7 @@
 						//closePasswordModifyDialog();
 					});
 					return;
-				}
+				} 
 			}
 		});
 	}
@@ -112,7 +113,7 @@
 	function logout(){
 		$.messager.confirm("系统提示","您确定要退出系统吗",function(r){
 			if(r){
-				window.location.href="/admin/Main/out";
+				window.location.href="{:url('/admin/Main/out')}";
 			}
 		});
 	}
@@ -184,10 +185,10 @@
 			<a href="javascript:openTab('科技人页面','/action/scienceList.html','icon-book')" style="width: 100px;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-book'" >科技人页面</a>		
 		</div>
 
-		<div title="知道系统" data-options="iconCls:'icon-folder'" style="padding:10px">
+		<!-- <div title="知道系统" data-options="iconCls:'icon-folder'" style="padding:10px">
 			<a href="javascript:openTab('知道管理','URL','icon-book')" style="width: 100px;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-book'" >知道管理</a>	
 			<a href="javascript:openTab('知道页面','URL','icon-book')" style="width: 100px;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-book'" >知道页面</a>		
-		</div>
+		</div> -->
 
 
 	</div>
@@ -203,12 +204,12 @@
  		<table cellspacing="8px">
  			<tr>
  				<td>用户名：</td>
- 				<td><input type="text" id="userName" name="userName" class="easyui-textbox" value="{$Think.session.username}" readonly="readonly" style="width: 200px"/></td>
+ 				<td><input type="text" id="userName" name="userName" class="easyui-textbox" value="{$Think.session.adminname}" readonly="readonly" style="width: 200px"/></td>
  			</tr>
- 			<tr>
+ 			<!-- <tr>
  				<td>原密码：</td>
  				<td><input type="password" id="password" name="password" class="easyui-textbox easyui-validatebox" required="true" style="width: 200px"/></td>
- 			</tr>
+ 			</tr> -->
  			<tr>
  				<td>新密码：</td>
  				<td><input type="password" id="newPwd" name="newPwd" class="easyui-textbox easyui-validatebox" required="true" style="width: 200px"/></td>
@@ -226,10 +227,6 @@
 	<a href="javascript:modifyPassword()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
 	<a href="javascript:closePasswordModifyDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
 </div>
-
-
-
-
 
 
 <!-- 页脚 -->

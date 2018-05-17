@@ -7,7 +7,7 @@
     <script>
         $(function(){
             $('#dg').datagrid({
-                url:'/json/User',
+                url:"{:url('/json/User/index')}",
                 columns:[[
                     {field:'userid',title:'id',width:'50'},
                     {field:'username',title:'用户名',width:'200',align:'center'},
@@ -47,7 +47,7 @@
                 options.first().attr("selected", true);
             })
 
-            url = '/json/User/add'; //根据接口文档上的POST地址
+            url = "{:url('/json/User/add')}"; //根据接口文档上的POST地址
         }
 
         function editUser(){
@@ -59,7 +59,7 @@
                 $('#dlg').dialog('open').dialog('center').dialog('setTitle','更新用户');
                 
                 $('#fm').form('load',row);
-                url = '/json/User/update/userid/'+row.userid;
+                url = "{:url('/json/User/update')}?userid="+row.userid;
             }else{
                 message();
             }
@@ -94,11 +94,11 @@
             if(row){
                 if (row.delete_flag == 'true') {
                     var info  = '启用';
-                    var url   = '/json/User/active';
+                    var url   = "{:url('/json/User/active')}";
                     var isTrue= false;
                 }else{
                     var info  = '禁用'; 
-                    var url   = '/json/User/disable';
+                    var url   = "{:url('/json/User/disable')}";
                     var isTrue= true;
                 }
                 
@@ -138,7 +138,7 @@
                 }else{
                 	$.messager.confirm('Confirm','确定删除？',function(r){
                 		if (r) {
-                            $.post("/json/User/delete",{userid:row.userid},function(data){
+                            $.post("{:url('/json/User/delete')}",{userid:row.userid},function(data){
                                     
     	                            if (data.result == 1) {
     	                                //执行成功

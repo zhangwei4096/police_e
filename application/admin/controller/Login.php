@@ -52,7 +52,7 @@ class Login extends Controller{
              $userinfo = Db::name('user')->where($where)->find();
              if ($userinfo && $userinfo['password'] == md5($data['password'])){
                  //验证通过开启全局SESSION
-                 Session::set('status',$userinfo['status']);
+                 Session::set('status',$where['status']);
                  Session::set('adminname',$data['username']);
                  Session::set('adminid',$userinfo['userid']);
                  return json([

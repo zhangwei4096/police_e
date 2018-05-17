@@ -31,7 +31,7 @@
         
         $('#dg').datagrid({
             //显示所有科技人
-            url:'/json/Science',
+            url:"{:url('/json/Science')}",
             columns:[[
                 {field:'id',title:'id',width:'50',align:'center',hidden:'true'},
                 {field:'title',title:'标题',width:'500',align:'center'},

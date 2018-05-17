@@ -178,10 +178,10 @@ a:active {
 			return;
 		} 
 		
-		$.post('/admin/Login/action',{username:name,password:pwd},function(data){
+		$.post("{:url('Login/action')}",{username:name,password:pwd},function(data){
 				if(data.msg == 'ok'){
 					//验证通过执行页面跳转
-					window.location.href="/admin/Main/index";
+					window.location.href="{:url('Main/index')}";
 				}else{
 					alert(data.data);
 				}

@@ -39,7 +39,7 @@
            
 
         $('#dg').datagrid({
-            url: '/json/Science/query',
+            url: "{:url('/json/Science/query')}",
             columns:[[
 
                 {field:'id',title:'id',hidden:'true'},
@@ -143,7 +143,7 @@
         var row = $('#dg').datagrid('getSelected');
         if(row){
             $.messager.confirm('Confirm','您确定要删除 '+row.title+' 这篇新闻吗?',function(f){
-                $.post('/json/Science/delete',{id:row.id},function(data){
+                $.post("{:url('/json/Science/delete')}",{id:row.id},function(data){
                         // var data = eval('(' + data + ')');
                         if (data.result == 1) {
                             message('当前新闻删除成功');

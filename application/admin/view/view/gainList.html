@@ -32,7 +32,7 @@
     $(function(){
 
         $('#dg').datagrid({
-            url:'/json/Product',
+            url:"{:url('/json/Product/index')}",
             columns:[[
                 {field:'id',title:'id',width:'50',align:'center'},
                 {field:'title',title:'标题',width:'200',align:'center'},
