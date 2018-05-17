@@ -4,6 +4,7 @@ namespace app\index\controller;
 use think\Controller;
 use think\Db;
 use app\index\model\ProductModel;
+use app\index\model\ScienceModel;
 
 class Index extends Controller{
     
@@ -36,6 +37,11 @@ class Index extends Controller{
         $three    = ProductModel::getKey('道路交通管理',3);  
         $four      = ProductModel::getKey('安全防范技术',3);  
         $five       = ProductModel::getKey('特种警用装备',3);  
+        
+        //科技人
+        
+        $science = (new ScienceModel)->getSecience();
+        
         $this->assign([
             'title'      => '首页',   //标题
             'news'    => $item,  //传处理好的数据到页面
@@ -46,7 +52,8 @@ class Index extends Controller{
             'four'      => $four,
             'five'       => $five,
             'all_one'  => $all_one,
-            'all_two'  => $all_two
+            'all_two'  => $all_two,
+            'science' => $science  //科技人
         ]);
         return view();
     }

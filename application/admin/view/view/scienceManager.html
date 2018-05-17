@@ -43,10 +43,9 @@
             columns:[[
 
                 {field:'id',title:'id',hidden:'true'},
-                {field:'science_name',title:'科技人名',align:'center'},
-                {field:'title',title:'标题',width:'200',align:'center'},
+                {field:'title',title:'标题',width:'500',align:'center'},
                 {field:'thumb',title:'缩略图',width:'300',align:'center',formatter: function(value,row,index){
-                            return "<img src='"+row.thumb+"' width='50' />";
+                            return "<img src='"+row.thumb+"' width='50' height='35' />";
                     }
                 },
                 {field:'add_time',title:'添加时间',width:'200',align:'center'},

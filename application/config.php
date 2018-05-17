@@ -208,12 +208,14 @@ return [
         'var_session_id' => '',
         // SESSION 前缀
         'prefix'         => 'think',
+        //是否使用cookies
+        'use_cookies' => true,
         // 驱动方式 支持redis memcache memcached
         'type'           => '',
         // 是否自动开启 SESSION
         'auto_start'     => true,
         //session过期时间
-        'expire' => 3600,
+        'expire' => 1,
     ],
 
     // +----------------------------------------------------------------------

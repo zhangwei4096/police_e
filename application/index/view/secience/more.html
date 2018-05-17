@@ -1,0 +1,257 @@
+{include file="public/head" /}
+<body>
+   {include file="public/menu" /}
+    <!--成果详情-->
+    <div class="achieveText mainW">
+        <h4 class="miniM clearfix">
+            <div class="fl">
+                您的位置：
+                <a href="{:url('Index/index')}"><span  class="mr10">首页</span></a>
+                >
+                <a href="{:url('Secience/index')}"><span class="mrl10">科技人</span></a>
+                >
+            </div>
+            <span class="color-red mrl10 pstTle ellipsis fl">{$data.title}</span>
+        </h4>
+        <div class="searList">
+         <!--    <div class="searWord fr recomList">
+                <h3 class="wordTle color-grey-5 recomTle"><span>热门推荐</span></h3>
+                <ul class="clearfix tcomList_1">
+                    <li class="video">
+                        <a href="techText.html">
+                            <div class="tcomImg">
+                                <div class="videoIcon"></div>
+                                <img src="__IMG__/user/commend.png" width="233" height="114"/>
+                            </div>
+                            <h4 class="ellipsis color-grey">情系群众，做老百姓的“贴心人”情系群众，做老百姓的“贴心人”</h4>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="techText.html">
+                            <div class="tcomImg">
+                                <div class="videoIcon"></div>
+                                <img src="__IMG__/user/commend.png" width="233" height="114"/>
+                            </div>
+                            <h4 class="ellipsis color-grey">情系群众，做老百姓的“贴心人”情系群众，做老百姓的“贴心人”</h4>
+                        </a>
+                    </li>
+                    <li class="video">
+                        <a href="techText.html">
+                            <div class="tcomImg">
+                                <div class="videoIcon"></div>
+                                <img src="__IMG__/user/commend.png" width="233" height="114"/>
+                            </div>
+                            <h4 class="ellipsis color-grey">情系群众，做老百姓的“贴心人”情系群众，做老百姓的“贴心人”</h4>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="techText.html">
+                            <div class="tcomImg">
+                                <div class="videoIcon"></div>
+                                <img src="__IMG__/user/commend.png" width="233" height="114"/>
+                            </div>
+                            <h4 class="ellipsis color-grey">情系群众，做老百姓的“贴心人”情系群众，做老百姓的“贴心人”</h4>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="clearfix tcomList_2">
+                    <li>
+                        <a href="techText.html">
+                            <h4 class="ellipsis">防刺服通常和哪些警用装备配合使用？</h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="techText.html">
+                            <h4 class="ellipsis">防刺服通常和哪些警用装备配合使用？</h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="techText.html">
+                            <h4 class="ellipsis">防刺服通常和哪些警用装备配合使用？</h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="techText.html">
+                            <h4 class="ellipsis">防刺服通常和哪些警用装备配合使用？</h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="techText.html">
+                            <h4 class="ellipsis">防刺服通常和哪些警用装备配合使用？</h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="techText.html">
+                            <h4 class="ellipsis">防刺服通常和哪些警用装备配合使用？</h4>
+                        </a>
+                    </li>
+                </ul>
+            </div> -->
+            <div class="searBox">
+                <!--文章-->
+                <div class="achiBox">
+                    <!--文章标题-->
+                    <div class="achiTle">
+                        <h1>{$data.title}</h1>
+                        <h5 class="color-grey-4">警e网 发布于
+                        <?php echo date('Y-m-d H:i:s',strtotime($data['add_time']));?>
+                            <span class="ml15">浏览：{$data.views}次</span>
+                        </h5>
+                    </div>
+                    <!--文章视频-->
+                    {if condition="($data['short_video'])"}
+
+                        <div class="achiVideo">
+                            <video id="my-video" class="video-js" x-webkit-airplay="allow" webkit-playsinline controls poster="__IMG__/user/poster.png" preload="auto"  data-setup="{}" width="827" height="434">
+                                <source src="{$data.short_video}" type="video/mp4"></source>
+                            </video>
+                            <button class="palyNow" id="palyBtn"></button>
+                        </div>
+
+                    {/if}
+                    
+                    <!--文章文字内容-->
+                    {$data.content}
+                </div>
+                <!--评论区-->
+               <!--  <div class="commend">
+                    <h3>全部评论<span class="color-grey-4 ml15">115</span></h3>
+                    <div class="cmdBox">
+                        <div class="clearfix">
+                            <div class="cmdHead fl">
+                                <img src="__IMG__/user/exhibide.png" width="54" height="54"/>
+                            </div>
+                            <div class="cmdArea fl">
+                                <div class="releaIpt">
+                                    <div class="maxLen">2000</div>
+                                    <textarea name="" placeholder="说点什么吧..." maxlength="2000"></textarea>
+                                </div>
+                                <div class="releaIpt clearfix mt16">
+                                    <button type="button" class="btn fr cmdBtn btn-lg">发表评论</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cmdBox">
+                        <div class="clearfix">
+                            <div class="cmdHead fl">
+                                <img src="__IMG__/user/exhibide.png" width="54" height="54"/>
+                            </div>
+                            <div class="fl">
+                                <div class="cmdArea">
+                                    <h5 class="color-grey-2"><span class="color-blue-1">浮生若梦骄傲 </span>&nbsp;|&nbsp;&nbsp;2016-01-18 20:38</h5>
+                                    <p class="fontsize-15 color-grey-5 cmdText">自动白平衡回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等操作提供警告音曝光模式 自动曝光自动白平衡回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等</p>
+                                    <div class="cmdOpt clearfix">
+                                        <div class="clearfix fr">
+                                            <div class="replyBtn fl">
+                                                回复
+                                            </div>
+                                            <div class="fablurBtn fl">
+                                                12
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cmdArea replyArea">
+                                    <h5 class="color-grey-2"><span class="color-blue-1">小确幸 </span>回复<span class="color-blue-1">浮生若梦骄傲 </span></h5>
+                                    <p class="fontsize-15 color-grey-5 cmdText">自动白平衡回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等操作提供警告音曝光模式 自动曝光自动白平衡回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等</p>
+                                    <div class="cmdOpt clearfix">
+                                        <div class="clearfix fr">
+                                            <div class="replyBtn fl">
+                                                回复
+                                            </div>
+                                            <div class="fablurBtn fl">
+                                                12
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rpl_input">
+                            <div class="releaIpt">
+                                <input type="text" placeholder="回复浮生若梦骄傲..."/>
+                            </div>
+                            <div class="releaIpt clearfix mt7">
+                                <button type="button" class="btn fr cmdBtn btn-lg">评论</button>
+                                <button type="button" class="btn fr cancleBtn btn-lg">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cmdBox">
+                        <div class="clearfix">
+                            <div class="cmdHead fl">
+                                <img src="__IMG__/user/exhibide.png" width="54" height="54"/>
+                            </div>
+                            <div class="fl">
+                                <div class="cmdArea">
+                                    <h5 class="color-grey-2"><span class="color-blue-1">浮生若梦骄傲 </span>&nbsp;|&nbsp;&nbsp;2016-01-18 20:38</h5>
+                                    <p class="fontsize-15 color-grey-5 cmdText">自动白平衡回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等操作提供警告音曝光模式 自动曝光自动白平衡回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等</p>
+                                    <div class="cmdOpt clearfix">
+                                        <div class="clearfix fr">
+                                            <div class="replyBtn fl">
+                                                回复
+                                            </div>
+                                            <div class="fablurBtn fl">
+                                                12
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rpl_input">
+                            <div class="releaIpt">
+                                <input type="text" placeholder="回复浮生若梦骄傲..."/>
+                            </div>
+                            <div class="releaIpt clearfix mt7">
+                                <button type="button" class="btn fr cmdBtn btn-lg">评论</button>
+                                <button type="button" class="btn fr cancleBtn btn-lg">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <!--footer-->
+   {include file="public/footer" /}
+    <script type="text/javascript">
+        // $(function(){
+        //     //回复
+        //     $(".replyBtn").click(function(){
+        //         $(this).addClass("active");
+        //         var parent=$(this).parents(".cmdArea");
+        //         var pat=$(this).parents(".cmdBox");
+        //         pat.find(".rpl_input").show();
+        //     })
+        //     //取消回复
+        //     $(".cancleBtn").click(function(){
+        //         var parent=$(this).parents(".rpl_input");
+        //         parent.hide();
+        //     })
+        //     //点赞
+        //     $(".fablurBtn").click(function(){
+        //         if($(this).hasClass("active")){
+        //             $(this).removeClass("active");
+        //         }else{
+        //             $(this).addClass("active");
+        //         }
+        //     })
+        //     //限制textarea字数在2000字以内
+        //     $(".releaIpt textarea").on("input propertychange", function(e) {  
+        //         var $this = $(this),_val=$this.val();
+        //         if (_val.length >2000) {  
+        //             layer.msg("最多输入2000个字");
+        //             $this.val(_val.substring(0, 2000));  
+        //         } 
+        //     }); 
+        // })
+        // myPlayer = neplayer('my-video', {errorDisplay:false}, function() {});
+        // var playerTech=videojs("my-video").tech({ IWillNotUseThisInPlugins: true });
+        // myPlayer.onPlayState(1,function(){$('#palyBtn').hide();});
+        // myPlayer.onPlayState(2,function(){$('#palyBtn').show();});
+        // $('#palyBtn').click(function(){myPlayer.play();})
+    </script>
+</body>
+</html>

@@ -7,7 +7,11 @@ class ScienceModel extends ProductModel{
         protected $pk     = 'id';
         
       
-        
+        public   function getSecience(){
+            //获取全部数据
+            $science = self::order('add_time desc')->paginate(9);  //每页显示9条数据
+            return $science;
+        }
         
         
 }

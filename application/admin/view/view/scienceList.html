@@ -34,18 +34,14 @@
             url:'/json/Science',
             columns:[[
                 {field:'id',title:'id',width:'50',align:'center',hidden:'true'},
-                {field:'science_name',title:'科技人名',width:'200',align:'center'},
-                {field:'title',title:'标题',width:'200',align:'center'},
-               
+                {field:'title',title:'标题',width:'500',align:'center'},
                 {field:'add_time',title:'添加时间',width:'200',align:'center'},
-               
                 {field:'thumb',title:'缩略图',width:'200',align:'center',formatter: function(value,row,index){
-                    // return "<img src='"+ row.thumb +"' width='150' />";  
-                    return "<img src='"+row.thumb+"' width='50' />";
+                    return "<img src='"+row.thumb+"' width='50' height='35' />";
                 }},
-                {field:'recommendation',title:'科技人推荐语',width:'400',align:'center'}
+                {field:'recommendation',title:'科技人推荐语',width:'400',align:'center'},
                 // {field:'short_video',title:'短视频',width:'200',align:'center'},
-                // {field:'hits',title:'点击量',width:'200',align:'center'}
+                {field:'views',title:'点击量',width:'200',align:'center'}
                 // {field:'likes',title:'点赞数',width:'200',align:'center'}
             ]]
         });

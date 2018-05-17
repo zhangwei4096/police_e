@@ -301,39 +301,59 @@
 			    </div>
 			</div>
 		</div>
-	</div> --><!--surf-end-->
+	</div> -->
+	<!--surf-end-->
+	
+
 	<!--科技人-->
 	<div class="techlogy mainW">
 		<div class="newsTle">
-			<h3 class="checkM fr"><a href="techText.html">查看更多</a></h3>
+			<h3 class="checkM fr"><a href="{:url('Secience/index')}">查看更多</a></h3>
 			<h1>科技人</h1>
 		</div>
+		{volist name="science" id="list" offset="0" length='1' }
 		<div class="clearfix">
 			<div class="tech_bg fr">
 				<a href="techText.html">
 					<div class="tech_video">
 						<div class="tv_bg">
-							<div class="videoIcon"></div>
-							<img src="__IMG__/user/video_post.png"/>
+							<div {if condition="($list['short_video'])"} class="videoIcon" {/if}></div>
+							<img src="{$list.thumb}" width="552" height="269" />
 						</div>
 					</div>
 					<div class="clearfix">
 						<div class="tech_text fr">
 							<div class="fontsize-22 color-grey">
-								王楷：踏实肯干的“小”警察
+								{$list.title}
 							</div>
-							<p class="ellipsis-3 color-grey-4">
-								一名初涉警营的年轻人，一位普通又平凡的民警，在浦阳派出所工作一年半来，王懋楷凭借自己的勤众口中“有困难找小王”这句话的主人公。王懋楷凭借自己的勤众口中“有困难找小王”这句话的主人公，在平凡的岗位上完成了不平凡的使命。
-							</p>
+							<p class="ellipsis-3 color-grey-4">{$list.recommendation}</p>
 						</div>
 					</div>
 				</a>
 			</div>
 		</div>
+		{/volist}
 		<div class="tech_list clearfix">
 			<ul>
 				<li>
-					<li>
+					{volist name="science" id="list" key="k" offset="1" length='3'}
+            		<li {if condition="($k%3==0)"} class="mr0" {/elseif condition="($k%3==0) and ($list['short_video'] != null)"} class="video mr0" {/if}>
+            			<a href="{:url('Secience/more',['id'=>$list['id']])}">
+            				<div class="exImg">
+            					<div class="techPlay">
+            						<div {if condition="($list['short_video'])"} class="videoIcon" {/if}></div>
+            						<img src="{$list.thumb}" width="370" height="180"/>
+            					</div>
+            				</div>
+            				<div class="tech_tle">
+        						<h3>{$list.title}</h3>
+        						<h5 class="color-grey-c"><?php echo date('Y-m-d',strtotime($list['add_time']));  ?></h5>
+        						<p class="ellipsis-2 nlP">{$list.recommendation}</p>
+        					</div>
+            			</a>
+            		</li>
+        		{/volist}
+            	<!-- 	<li class="mr0">
             			<a href="techText.html">
             				<img src="__IMG__/user/techlogy.png"/>
             				<div class="resText">
@@ -341,25 +361,7 @@
 	            				<h4 class="ellipsis-2">一名初涉警营的年轻人，一位普通又平凡的民警，在浦阳派出所工作一年半来。</h4>
             				</div>
             			</a>
-            		</li>
-            		<li>
-            			<a href="techText.html">
-            				<img src="__IMG__/user/techlogy.png"/>
-            				<div class="resText">
-            					<h3>情系群众，做老百姓的“贴心人”</h3>
-	            				<h4 class="ellipsis-2">一名初涉警营的年轻人，一位普通又平凡的民警，在浦阳派出所工作一年半来。</h4>
-            				</div>
-            			</a>
-            		</li>
-            		<li class="mr0">
-            			<a href="techText.html">
-            				<img src="__IMG__/user/techlogy.png"/>
-            				<div class="resText">
-            					<h3>情系群众，做老百姓的“贴心人”</h3>
-	            				<h4 class="ellipsis-2">一名初涉警营的年轻人，一位普通又平凡的民警，在浦阳派出所工作一年半来。</h4>
-            				</div>
-            			</a>
-            		</li>
+            		</li> -->
 				</li>
 			</ul>
 		</div>

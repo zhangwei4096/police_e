@@ -25,11 +25,11 @@ class ScienceModel extends Model{
     public function queryScience($key_words){
         //查询科技人
         $science = Db::table('police_science')->where('title','like',"%{$key_words}%")
-        ->whereOr('science_name','like',"%{$key_words}%")->select();
+        ->select();
         $result = [
             'result' => 1,
             'total'  => Db::table('police_science')->where('title','like',"%{$key_words}%")
-            ->whereOr('science_name','like',"%{$key_words}%")->count(),
+            ->count(),
             'message'    => 'ok',
             'rows'   => $science
             ];
