@@ -1,0 +1,36 @@
+@charset "utf-8";
+/*header*/
+#top_head_div{
+	width: auto!important; width: 1000px;min-width: 1000px;
+}
+
+a{text-decoration: none;}
+
+/*header-layout*/
+#top-wrapper{height:88px; width:100%; background:#fff; overflow:hidden}
+.top-top{height:80px; width:100%; background:url(../img/backstage/background_top_01.jpg) no-repeat; overflow:hidden}
+.top-bottom_1{height:8px; background:#82bc4f; width:214px; overflow:hidden}
+.top-bottom_2{height:8px; background:#82bc4f; width:100%; overflow:hidden; clear:both}  
+.tt-con{float:left}
+.tt-r{float:right; padding-top:8px;}
+.ora{color:#ff6600;}
+.company-info{padding:6px 0px 0px 340px;font-size:12px; color:#222}
+/*header-pic*/
+.logo-web{background:url(../images/logs/frame_01.jpg) no-repeat; width:205px; height:80px; float:left;}
+.logo-system{background:url(../images/logs/gt_top_softabout_caigou.gif) right bottom no-repeat; width:560px; height:50px;}
+/*header-style*/
+.tt-con p{padding:8px 0px 0px 58px; font-size:12px; color:#222}
+.tt-r a{padding:0px 20px 0px 0px;}
+.tt-r a:hover{color:blue}
+
+/*left-menu*/
+ul.left-menu-tree{
+	margin-top: 5px;
+}
+.tree li{
+	padding: 3px 0px;
+}
+/*icons*/
+.icon_new{
+	width: 16px;height: 16px;margin-left:20px; background: url("../images/icons/icon_new.png") no-repeat center center;
+}

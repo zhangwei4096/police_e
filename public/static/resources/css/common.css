@@ -1,0 +1,223 @@
+@charset "utf-8";
+/* CSS Document */
+/*全局的*/
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td { margin:0; padding:0; border:0; outline:0; font-weight:inherit; font-style:inherit; font-size:12px; font-family:inherit; /*vertical-align:baseline;*/ }
+:focus { outline:0; }
+a{text-decoration:none;cursor:pointer;color: #373634;}
+a:active { outline:none; }
+a:hover{ text-decoration:none;}
+body { line-height:1; color:#666; background:#fff; font-family: 宋体,tahoma,arial, Geneva, sans-serif;/*text-shadow:0 1px 0 rgba(250,250,250,.8);*/ 
+-webkit-font-smoothing: subpixel-antialiased;}
+ol,ul,li { list-style:none; }
+table { border-collapse:separate; border-spacing:0;}
+caption,th,td { text-align:center; font-weight:normal; }
+blockquote:before,blockquote:after,q:before,q:after { content:""; }
+blockquote,q { quotes:"" ""; }
+.clear{ clear:both; height:1px; visibility:hidden; line-height:1px; overflow:hidden;}
+
+.clearfix:after{ content:" "; display:block; height:0; clear:both;visibility:hidden;}
+.clearfix{ display:inline-block;}
+.hide{ display:none;}
+.show{ display:block;}
+
+.content_div{
+	padding:5px 0 0 10px;
+}
+.mytable{
+	width:900px;
+}
+.mytable-s{
+	
+}
+.mytable  tr td,.mytable-s tr td{
+	padding:5px 0px 3px 0px;
+}
+.title-info{color:red;}
+/*iframe出横向滚动条*/
+#bodyscroll{overflow-x:auto; width: auto!important;width: 972px;min-width: 972px;}
+/*color*/
+.red{color: red;}
+/*==Word Of Styles=============*/
+.p12{font-size:12px; line-height:18px;}
+.p122{font-size:12px; line-height:24px;}
+.p1222{font-size:12px; line-height:21px;}
+.p14{font-size:14px; line-height:24px;}
+.p144{font-size:14px; line-height:21px;}
+.p18{font-size:18px; line-height:24px; color:#222; padding:15px 0px 8px 0px; font-weight:bold}
+
+/*==Input Of Styles=============*/
+.text-1{height:20px; width:40px; overflow:hidden; margin:0px 5px;padding:0px; font-size:12px}
+.text-0{height:20px; width:90px; overflow:hidden; margin:0px 5px;padding:0px; font-size:12px}
+.text-2{height:20px; width:120px; overflow:hidden; margin:0px 5px;padding:0px; font-size:12px}
+.text00{height:20px; width:130px; overflow:hidden; margin:0px 5px;padding:0px; font-size:12px}
+.text01{height:20px; width:150px; overflow:hidden; margin:0px 5px;padding:0px; font-size:12px}
+.text02{height:20px; width:200px; overflow:hidden; margin:0px 5px;padding:0px; font-size:12px}
+.text022{height:20px; width:230px; overflow:hidden; margin:0px 5px;padding:0px; font-size:12px}
+.text03{height:20px; width:250px; overflow:hidden; margin:0px 5px;padding:0px; font-size:12px}
+.text04{height:20px; width:320px; overflow:hidden; margin:0px 5px;padding:0px; font-size:12px}
+.text05{height:20px; width:350px; overflow:hidden; margin:0px 5px;padding:0px; font-size:12px}
+.text06{height:20px; width:380px; overflow:hidden; margin:0px 5px;padding:0px; font-size:12px}
+.text07{height:20px; width:410px; overflow:hidden; margin:0px 5px;padding:0px; font-size:12px}
+.text20{height:20px; width:580px; overflow:hidden; margin:0px 5px;padding:0px; font-size:12px}
+.textarea00{margin:0px 5px;padding:0px; font-size:12px;}
+.text30{width:35em; height:60px; overflow-x:hidden; overflow-y:scroll; margin:0px 5px;padding:0px; font-size:12px}
+.text40{width:75%; height:80px; overflow-x:hidden; overflow-y:scroll; margin:0px 5px;padding:0px; font-size:12px}
+.text60{width:75%; height:120px; overflow-x:hidden; overflow-y:scroll; margin:0px 5px;padding:0px; font-size:12px}
+.textall{width:99%; height:100px; overflow-x:hidden; overflow-y:scroll; margin:0px 5px;padding:0px; font-size:12px}
+.marginspan5{height: 20px;width: 5px;}
+/*修正内部float导致外部div未撑开*/
+.clearfix:after {
+	content: "."; 
+ 	display: block; 
+	height: 0; 
+	clear: both; 
+	visibility: hidden;
+}
+/* Hides from IE-mac /*/
+* html .clearfix {height: 1%;}
+/* End hide from IE-mac */ 
+/*定义功能区样式*/
+.cz_panel{display: block;width: auto!important; width: 970px;min-width: 970px;}
+.cz_panel_bottom{display: block;width: auto!important; width: 964px;min-width: 964px;border: 1px solid #d3d3d3; padding:2px;margin: 4px;background: #ebebeb;}
+/*==Search info Of Styles=============*/
+.search-box{
+	padding:0px;margin: 0px; float:left; white-space: nowrap;overflow: hidden;
+}
+.audit-box{
+	padding:0px;margin: 0px;  white-space: nowrap;overflow: hidden;
+}
+.search-box-bg{
+	padding:2px;margin: 2px; white-space: nowrap;overflow: hidden;border: 1px solid #d3d3d3; background: #ebebeb;
+}
+
+/** overflow: hidden; 解决父DIV 高度为0的问题 **/
+.search-info {display:block; overflow: hidden;}
+.search-info li{float:left;padding: 2px 0px;margin-top:2px; height:24px;}
+.search-info li input[readonly="readonly"] {border: 0px;background-color: transparent;}
+.search-info div{word-break:break-all;display:block;}
+.search-info textarea{
+	resize:none;
+}
+
+.search-button {clear: both;width: auto!important; width: 964px;min-width: 964px;padding:2px;margin: 2px;border: 1px solid #d3d3d3;}
+.search-button li{display: inline;margin: 0px 5px;}
+
+.cz_panel_bottom li{float:left;padding: 2px 0px;font-size:12px; line-height:24px;margin: 0px 5px;}
+.container{border:solid 1px #D1EEEE;}
+.four-lie{width:240px;}
+.three-lie{width:320px;}
+.two-lie{width:480px}
+.one-lie{width:99%;}
+.two-lies{width:50%;}
+.three-lies{width:33%;}
+.four-lies{width:25%;}
+.two-lie-edit{width:46%;}
+.infoname{width:5em; text-align:right; display:block; float:left}
+.infoname1{width:6em; text-align:right; display:block; float:left}
+.infoname2{width:7em; text-align:right; display:block; float:left}
+.infoname3{width:8em; text-align:right; display:block; float:left}
+.infoname4{width:9em; text-align:right; display:block; float:left;color: #000000;}
+.infoname5{width:10em; text-align:right; display:block; float:left}
+.infoname6{width:11em; text-align:right; display:block; float:left}
+.infoname7{width:12em; text-align:right; display:block; float:left}
+.infoname8{width:13em; text-align:right; display:block; float:left}
+.infoname-r{width:8em; text-align:left; display:block; float:left}
+/*==Icon Of Styles=============*/
+.icon{display:block;float:left;margin:0 10px;width:16px;height:16px;background:0 0 no-repeat;cursor:pointer;}
+.icon_input {float:left;margin:0 10px;}/* 输入框等与icon并排时使用该class */
+.icon_tc{background:url(../images/icons/icon_tc.gif);}
+.icon_delete{background:url(../images/icons/icon_delete.gif);}
+.icon_add{background:url(../images/icons/icon_add.gif);}
+.icon_approval{background:url(../images/icons/icon_approval.gif);}
+.icon_cancel{background: url(../images/icons/icon_cancel.png);}
+.icon_package-send{background:url(../images/icons/icon_package_get.gif);}
+.icon_package-receive{background:url(../images/icons/icon_package_yes.gif);}
+.icon_package{background:url(../images/icons/icon_package.gif);}
+.icon_detail{background:url(../images/icons/icon_detail.gif);}
+.icon_edit{background:url(../images/icons/icon_edit.gif);}
+.icon_printer{background:url(../images/icons/icon_printer.gif);}
+.icon_yes{background:url(../images/icons/icon_yes.gif);}
+
+.icon_bl{background:url(../images/icons/icon_bl.gif);}
+.icon_jfqr{background:url(../images/icons/icon_jfqr.gif);}
+.icon_jf{background:url(../images/icons/icon_jf.gif);}
+.icon_over{background:url(../images/icons/icon_over.gif);}
+.icon_scckd{background:url(../images/icons/icon_scckd.gif);}
+.icon_scrkd{background:url(../images/icons/icon_scrkd.gif);}
+.icon_activate{background:url(../images/icons/icon_activate.gif);}
+.icon_scwzyyd{background:url(../images/icons/icon_scwzyyd.gif);}
+.icon_shqr{background:url(../images/icons/icon_shqr.gif);}
+.icon_data{background:url(../images/icons/icon_data.gif);}
+.icon_ckdxx{background:url(../images/icons/icon_ckdxx.gif);}
+.icon_zf{background:url(../images/icons/icon_zf.gif);}
+
+.icon_czjl{background:url(../images/icons/icon_czjl.gif);}
+.icon_hzddsh{background:url(../images/icons/icon_hzddsh.gif);}
+.icon_jcht{background:url(../images/icons/icon_jcht.gif);}
+.icon_jfjl{background:url(../images/icons/icon_jfjl.gif);}
+.icon_js{background:url(../images/icons/icon_js.gif);}
+.icon_pc{background:url(../images/icons/icon_pc.gif);}
+.icon_tpsp{background:url(../images/icons/icon_tpsp.gif);}
+.icon_tpsq{background:url(../images/icons/icon_tpsq.gif);}
+.icon_xq{background:url(../images/icons/icon_xq.gif);}
+.icon_yqsp{background:url(../images/icons/icon_yqsp.gif);}
+.icon_zz{background:url(../images/icons/icon_zz.gif);}
+.icon_cxsc{background:url(../images/icons/icon_cxsc.gif);}
+.icon_copy{background:url(../images/icons/icon_copy.gif);}
+.icon_tj{background:url(../images/icons/icon_tj.gif);}
+.icon_fx{background:url(../images/icons/icon_fx.gif);}
+.icon_cx{background:url(../images/icons/icon_cx.gif);}
+.icon_tc{background:url(../images/icons/icon_tc.gif);}
+.icon_jssh{background:url(../images/icons/icon_jssh.gif);}
+.icon_red{background:url(../images/icons/icon_red.gif);}
+.icon_yellow{background:url(../images/icons/icon_yellow.gif);}
+.icon_green{background:url(../images/icons/icon_green.gif);}
+.icon_ykhz{background:url(../images/icons/icon_ykhz.gif);}
+
+.icon_panel_tools_max{background:url('../img/icons/panel_tools_max.png') no-repeat center center;}
+.icon_panel_tools_normal{background:url('../img/icons/panel_tools_normal.png') no-repeat center center;}
+
+.datagrid-thead-span{
+	font-size:14px;
+}
+
+.list_detail tr td{
+	font-size:14px;
+	width:d;
+	padding:10px;
+}
+table.dataintable {
+   border: 1px solid #888888;
+   border-collapse: collapse;
+   font-family: Arial,Helvetica,sans-serif;
+   margin-top: 10px;
+   width: 100%;
+}
+table.dataintable th {
+   background-color: #CCCCCC;
+   border: 1px solid #888888;
+   padding: 5px;
+   text-align: center;
+   vertical-align: baseline;
+}
+table.dataintable td {
+   background-color: #EFEFEF;
+   border: 1px solid #AAAAAA;
+   padding: 5px;
+   vertical-align: text-top;
+}
+
+table.dataintable td input[readonly="true"]{
+    background-color: #EFEFEF;
+    border: 0px;
+    text-align: center;
+}
+
+
+.banner li{float:left;padding: 2px 0px; height:100px;border: 2px solid #D3D3D3;}
+
+.bold{font-weight: bold;}
+
+.pics{
+height:170px;
+}
