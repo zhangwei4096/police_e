@@ -60,7 +60,7 @@ class Product extends Controller{
         $product['param'] = json_decode($product['param'],true);
         //判断参数是否设置
         
-        if ($product['param']){
+        if ($product['param']['name']){
             foreach ($product['param']['name'] as $k => $v){
                $a[$k]['name'] = $v;
                $a[$k]['value']  = $product['param']['value'][$k];

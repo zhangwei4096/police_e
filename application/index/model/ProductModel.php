@@ -34,11 +34,12 @@ class ProductModel extends Model{
         
         //执行入库操作
         if($type == 1){
-            //科技人没有参数的
-            array_pop($data['param_name']);
-            array_pop($data['param_value']);
-            $param['name']  = $data['param_name'];
-            $param['value']  =  $data['param_value'];
+            //成果的参数
+            
+//             array_filter($data['param_name']);
+//             array_filter($data['param_value']);
+            $param['name']  = array_values(array_filter($data['param_name']));
+            $param['value']  =  array_values(array_filter($data['param_value']));
             $data['param']    = json_encode($param);
             unset($data['param_name']);
             unset($data['param_value']);
