@@ -11,7 +11,8 @@ class Science extends Controller{
         //科技人信息展示
         $request = Request::instance();
         if ($request->isPost()){
-            $result = (new ScienceModel())->lists();
+            $info    = $request->param(); 
+            $result = (new ScienceModel())->lists($info);
             return json($result);
         }
     }
@@ -21,10 +22,11 @@ class Science extends Controller{
         //关键字查看科技人
         $request = Request::instance();
         if ($request->isPost()){
+            $info            = $request->param(); 
             $key_words = $request->param('key_words');
             if (@$key_words){
                 //有关键字提交过来
-                $result = (new ScienceModel())->queryScience($key_words);
+                $result = (new ScienceModel())->queryScience($key_words,$info);
                 return json($result);
             }
             

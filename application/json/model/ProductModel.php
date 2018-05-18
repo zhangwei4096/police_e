@@ -10,25 +10,24 @@ class ProductModel extends Model{
     protected $updateTime = false;
     protected $createTime   = false;
     
-    public function lists(){
+    public function lists($info){
         $result = [
             'result' => 1,
             'total'  => $this->count(),
             'message'    => 'ok',
-            'rows'   =>  Db::name('product')->order('add_time desc')->select()
+            'rows'   =>  Db::name('product')->order('add_time desc')->page($info['page'],$info['rows'])->select()
         ];
         
         return $result;
     }
     
-    public function getKey($key_words){
+    public function getKey($key_words,$info){
         
-        $product = Db::table('police_product')->where('title','like',"%{$key_words}%")->select();
         $result = [
             'result' => 1,
-            'total'  => Db::table('police_product')->where('title','like',"%{$key_words}%")->count(),
+            'total'  => Db::name('product')->where('title','like',"%{$key_words}%")->page($info['page'],$info['rows'])->count(),
             'message'    => 'ok',
-            'rows'   => $product
+            'rows'   => Db::name('product')->where('title','like',"%{$key_words}%")->page($info['page'],$info['rows'])->select()
         ];
         return $result;
     }
@@ -37,5 +36,29 @@ class ProductModel extends Model{
         $info = $this->all(['id'=> $id]);
         return $info;
     }
+    
+    public function deleteProduct($id){
+        //删除成果
+        $product = $this->destroy($id);
+        return $this->result($product);
+    }
+    
+    
+    private function result($rs){
+        if($rs){
+            $result = [
+                'result'      => 1,
+                'message' => 'ok'
+            ];
+        }else{
+            $result = [
+                'result'      => 2,
+                'message' => 'error'
+            ];
+        }
+        
+        return $result;
+    }
+    
     
 }

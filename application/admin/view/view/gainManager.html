@@ -87,6 +87,25 @@
             });
     }
 
+    function del(){
+        //删除成果
+        var row = $('#dg').datagrid('getSelected');
+        if(row){
+            $.messager.confirm('Confirm','您确定要删除 '+row.title+' 这篇成果吗?',function(f){
+               if(f){
+            	   $.post("{:url('/json/Product/delete')}",{id:row.id},function(data){
+                       // var data = eval('(' + data + ')');
+                       if (data.result == 1) {
+                           message('当前成果删除成功');
+                           $('#dg').datagrid('reload');
+                       }
+              		 });
+               }
+            });
+        }else{
+            message();
+        }
+    }
 
 </script>
 <body>
@@ -98,6 +117,7 @@
            
             <!-- <a href="javascript::void(0)" class="easyui-linkbutton" iconCls="icon-redo"  plain="true" onclick="openPj()">开启评价</a>
             <a href="javascript::void(0)" class="easyui-linkbutton" iconCls="icon-remove"  plain="true" onclick="closePj()">禁止评价</a> -->
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="del()">删除</a>
             <a href="javascript::void(0)" class="easyui-linkbutton" iconCls="icon-help" plain="true"  onclick="gainExport()">导出成果</a>
         </div> 
         

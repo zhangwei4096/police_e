@@ -75,12 +75,16 @@
                     return $(this).form('validate');
                 },
                 success: function(data){
-                    var data = eval('(' + data + ')');
+                     var data = eval('(' + data + ')'); 
                     if(data.result == 1){
                         //执行成功 TRUE
                         //关闭小窗口 数据刷新
                         $('#dlg').dialog('close');
                         $('#dg').datagrid('reload');
+                        message("恭喜您，操作成功");
+                    }else{
+                    	//输出错误信息
+                    	 message(data.data);
                     }
                 }
             });
@@ -258,7 +262,7 @@
                 </select>
             </div>
  
-            <div class="fitem" style="margin-top: 15px;">
+             <div class="fitem" style="margin-top: 15px;">
                 <label>地址:</label>
                 <input  name="addr" class="easyui-textbox" readonly />
             </div> 
@@ -271,7 +275,7 @@
             <div class="fitem">
                 <label>个人介绍:</label>
                 <input name="remark" class="easyui-textbox" readonly />
-            </div>
+            </div> 
         
                <div class="fitem">
                 <label>状态:</label>
@@ -281,14 +285,14 @@
                 </select>
             </div>
             
-            <div class="fitem">
+             <div class="fitem">
                 <label>类型:</label>
                 <select name="type">
                     <option value="0">游客</option>
                     <option value="1">普通会员</option>
                     <option value="2">超级会员</option>
                 </select>
-            </div>
+            </div> 
 
             <div class="fitem">
                 <label>删除标志:</label>
@@ -296,7 +300,7 @@
                     <option value="false">否</option>
                     <option value="true">是</option>
                 </select>
-            </div>
+            </div> 
             
             <div class="fitem">
                 <label>当前皮肤:</label>
@@ -309,7 +313,7 @@
      
 
     <!-- 弹出FORM表单 -->
- <div id="dlg" class="easyui-dialog" style="width: 400px;height:500px;padding: 10px 20px" closed="true" buttons="#dlg-buttons">
+ <div id="dlg" class="easyui-dialog" style="width: 400px;height:400px;padding: 10px 20px" closed="true" buttons="#dlg-buttons">
         <form id="fm" method="post" novalidate>
          <div class="ftitle">用户信息</div>
             <div class="fitem">
@@ -345,7 +349,7 @@
                 </select>
             </div>
  
-            <div class="fitem" style="margin-top: 15px;">
+           <!--  <div class="fitem" style="margin-top: 15px;">
                 <label>地址:</label>
                 <input  name="addr" class="easyui-textbox">
             </div> 
@@ -358,7 +362,7 @@
             <div class="fitem">
                 <label>个人介绍:</label>
                 <input name="remark" class="easyui-textbox" required="true">
-            </div>
+            </div> -->
         
             <div class="fitem">
                 <label>状态:</label>
@@ -368,7 +372,7 @@
                 </select>
             </div>
             
-            <div class="fitem">
+           <!--  <div class="fitem">
                 <label>类型:</label>
                 <select name="type">
                     <option value="0">游客</option>
@@ -383,7 +387,7 @@
                     <option value="false">否</option>
                     <option value="true">是</option>
                 </select>
-            </div>
+            </div> -->
             
             <div class="fitem">
                 <label>当前皮肤:</label>

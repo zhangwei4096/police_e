@@ -11,24 +11,24 @@ class NewsModel extends Model{
     
     
     
-    public function lists(){
+    public function lists($info){
         $result = [
             'result' => 1,
             'total'  => $this->count(),
             'message'    => 'ok',
-            'rows'   => Db::name('news')->order('add_time desc')->select()
+            'rows'   => Db::name('news')->order('add_time desc')->page($info['page'],$info['rows'])->select()
         ];
         
         return $result;
     }
     
-    public function queryKey($key){
-        $news = Db::name('news')->where('title','like',"%{$key}%")->order('add_time desc')->select();
+    public function queryKey($key,$info){
         $result = [
             'result' => 1,
             'total'  => Db::name('news')->where('title','like',"%{$key}%")->count(),
             'message'    => 'ok',
-            'rows'   => $news
+            'rows'   => Db::name('news')->where('title','like',"%{$key}%")->order('add_time desc')->
+                page($info['page'],$info['rows'])->select()
             ];
         return $result;
     }

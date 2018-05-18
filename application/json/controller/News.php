@@ -14,13 +14,14 @@ class News extends Controller{
     public function index(){
         $request   = Request::instance();
         $key_words = $request->post('key_words'); //接收查询关键字
+        $info = $request->param();
         if ($request->isPost()){
             if(@$key_words){
                 //处理关键字查询请求
-                $result  = (new NewsModel())->queryKey($key_words);  
+                $result  = (new NewsModel())->queryKey($key_words,$info);  
             }else{
                 $info    = $request->post();
-                $result  = (new NewsModel())->lists();
+                $result  = (new NewsModel())->lists($info);
             }
             return json($result);
         }

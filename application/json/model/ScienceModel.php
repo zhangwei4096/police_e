@@ -10,28 +10,27 @@ class ScienceModel extends Model{
     protected $updateTime    = false;
     
     
-    public function lists(){
+    public function lists($info){
         $result = [
             'result' => 1,
             'total'  => $this->count(),
             'message'    => 'ok',
-            'rows'   =>   Db::name('science')->order('add_time desc')->select()
+            'rows'   =>   Db::name('science')->order('add_time desc')->page($info['page'],$info['rows'])->select()
         ];
         
         return $result;
     }
     
     
-    public function queryScience($key_words){
+    public function queryScience($key_words,$info){
         //查询科技人
-        $science = Db::table('police_science')->where('title','like',"%{$key_words}%")
-        ->select();
         $result = [
             'result' => 1,
-            'total'  => Db::table('police_science')->where('title','like',"%{$key_words}%")
-            ->count(),
+            'total'  => Db::name('science')->where('title','like',"%{$key_words}%")
+            ->page($info['page'],$info['rows'])->count(),
             'message'    => 'ok',
-            'rows'   => $science
+            'rows'   => Db::name('science')->where('title','like',"%{$key_words}%")
+            ->page($info['page'],$info['rows'])->select()
             ];
         return $result;
     }
@@ -41,10 +40,6 @@ class ScienceModel extends Model{
        return $this->result($rs);
    }
     
-   
-   
-   
-   
    
    private function result($rs){
        if($rs){

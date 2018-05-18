@@ -11,20 +11,21 @@ class User extends Controller{
     
     public function _initialize(){
         header("Content-type:text/html;Charset=Utf-8");
-        $request = Request::instance();
     }
     
     public function index(){
+        //查询所有用户  并且可以根据用户名来模糊查询
         $request = Request::instance();
         $info       = $request->param();
+        
        if (@$info['username']){
          
-          $rs = (new UserModel())->queryUser($info['username']);
+          $rs = (new UserModel())->queryUser($info['username'],$info);
           return json($rs);
           
        }else{
-           $rs = (new UserModel())->lists();
-           return json($rs); //����JSON����
+           $rs = (new UserModel())->lists($info);
+           return json($rs);
        }
        
     }
@@ -37,7 +38,7 @@ class User extends Controller{
         if ($request->isPost()){
             $info = $request->param();
             
-            $rs     = (new UserModel())->addUser($info);
+            $rs     = (new UserModel)->addUser($info);
             return json($rs);
         }
     }
@@ -55,7 +56,7 @@ class User extends Controller{
           $info['password'] = md5($info['password']);
       }
       
-      $rs = (new UserModel())->updateUser($info);
+      $rs = (new UserModel)->updateUser($info);
       return  json($rs);
     }
     
@@ -64,7 +65,7 @@ class User extends Controller{
         $request = Request::instance();
         if ($request->isPost()){
             $info = $request->param();
-            $rs     = (new UserModel())->delUser($info['userid']);
+            $rs     = (new UserModel)->delUser($info['userid']);
             return json($rs);
         }
     }
@@ -75,7 +76,7 @@ class User extends Controller{
         $request = Request::instance();
         if ($request->isPost()){
             $info = $request->param();
-            $rs     = (new UserModel())->disableUser($info['userid']);
+            $rs     = (new UserModel)->disableUser($info['userid']);
             return json($rs);
         }
      
@@ -86,7 +87,7 @@ class User extends Controller{
         $request = Request::instance();
         if ($request->isPost()){
             $info = $request->param();
-            $rs     = (new UserModel())->activUser($info['userid']);
+            $rs     = (new UserModel)->activUser($info['userid']);
             return json($rs);
         }
     }
@@ -101,7 +102,7 @@ class User extends Controller{
         $request = Request::instance();
         if ($request->isPost()){
             //返回没有审核通过的用户
-            $result = (new UserModel())->authUser();
+            $result = (new UserModel)->authUser();
             return json($result);
         }
         
@@ -112,7 +113,7 @@ class User extends Controller{
         $request = Request::instance();
         if($request->isPost()){
             $userid = $request->param('userid');
-            $result  = (new UserModel())->approveUser($userid);
+            $result  = (new UserModel)->approveUser($userid);
             return json($result);
         }
     }

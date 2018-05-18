@@ -5,25 +5,27 @@ use think\Request;
 use app\json\model\ProductModel;
 
 class Product extends Controller{
-    //³É¹û¹ÜÀí½Ó¿Ú
+    //ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½
     
     public function index(){
-        //³É¹ûÁÐ±í
+        //æˆæžœå…¨éƒ¨çš„æ•°æ®
         $request = Request::instance();
         if ($request->isPost()){
-            $result  = (new ProductModel())->lists();
+            $info     = $request->param();
+            $result  = (new ProductModel())->lists($info);
             return json($result);
         }
        
     }
     
     public function query(){
-        //³É¹û²éÑ¯
+        //ï¿½É¹ï¿½ï¿½ï¿½Ñ¯
         $request = Request::instance();
         if ($request->isPost()){
             $key_words = $request->post('key_words');
+            $info     = $request->param();
             if ($key_words){
-                $result         = (new ProductModel())->getKey($key_words);
+                $result         = (new ProductModel())->getKey($key_words,$info);
                 return  json($result);
             }else{
                 $result = [
@@ -37,7 +39,7 @@ class Product extends Controller{
     }
     
     public function get(){
-        //²é¿´³É¹ûÏêÇé
+        //ï¿½é¿´ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½
         $request = Request::instance();
         if ($request->isGet()){
             $id = $request->param('id');
@@ -48,7 +50,19 @@ class Product extends Controller{
     }
     
     public function export(){
-        //³É¹ûµ¼³ö
+        //æˆæžœå¯¼å‡º
     }
     
+    public function delete(){
+        //æˆæžœåˆ é™¤æ“ä½œ
+        $request = Request::instance();
+        if ($request->isPost()){
+            $id = $request->post('id');
+            $result = (new ProductModel)->deleteProduct($id);
+            return json($result);
+        }
+    }
+
+
+
 }
