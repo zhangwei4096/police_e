@@ -12,30 +12,6 @@ class News extends Controller{
          $news = NewsModel::getCategory($category);  
          $page  = $news->render();
          
-         $rs = '';
-         foreach ($news as $key => $val){
-             //判断是不是第三个标签  如果是则输出最大的优先级
-             if($key == 2 || $key == 5){
-                 $type = "class='mr0'";
-             }
-             $rs.='<li '.@$type.'>';
-             $rs.='<a href='.url('News/more',['id'=>$val['id']]).'>';
-             $rs.='<div class="achImg">';
-             $rs.='<img src="'.$val['thumb'].'" width="380" height="210"/>';
-             $rs.='</div>';
-             $rs.='<div class="resText">';
-             $rs.='<div class="clearfix newsTitle">';
-             $rs.='<div class="nTime">'.date('d',strtotime($val['add_time'])).' ';
-             $rs.='<h4 class="color-grey">'.date('Y/m',strtotime($val['add_time'])).'</h4>';
-             $rs.='</div>';
-             $rs.='<h3>'.$val['title'].'</h3>';
-             $rs.='</div>';
-             $rs.='<p class="ellipsis-3 nlP">'.$val['summary'].'';
-             $rs.='</p>';
-             $rs.='</div>';
-             $rs.='</a>';
-             $rs.='</li>';
-         }
          
          //分类
          switch ($category){
@@ -52,7 +28,7 @@ class News extends Controller{
          
          $this->assign([
              'title'   => '新闻-'.$category,   //标题
-             'news' => $rs,  //在控制器中输出数据
+             'data' => $news,  //在控制器中输出数据
              'page' => $page,  //分页
              'page_total' => $news->total()
          ]);

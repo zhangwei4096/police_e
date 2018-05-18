@@ -30,7 +30,25 @@
 			</h4>
 			<div class="reSwiper active newsPage">
 				<ul class="resUl clearfix">
-					{$news}
+					{volist name="data" id="list" key="k"}
+					 <li {if condition="($k%3==0)"} class="mr0"{/if} >
+		              <a href="{:url('News/more',['id'=>$list['id']])}">
+		              <div class="achImg">
+		              <img src="{$list.thumb}" width="380" height="210"/>
+		              </div>
+		              <div class="resText">
+		              <div class="clearfix newsTitle">
+		              <div class="nTime"><?php echo date('d',strtotime($list['add_time']));?> 
+		              <h4 class="color-grey"><?php echo date('Y/m',strtotime($list['add_time']));?></h4>
+		              </div>
+		              <h3>{$list.title}</h3>
+		              </div>
+		              <p class="ellipsis-3 nlP">{$list.summary}
+		              </p>
+		              </div>
+		              </a>
+              		</li>
+					{/volist}
             	</ul>
             	<!--分页-->
 				<div class="pagebox clearfix">
