@@ -1,0 +1,60 @@
+            <div class="mcLeft fl">
+                <div class="mcHead">
+                    <div class="mc_head">
+                        <img src="__IMG__/user/news.png"/>
+                    </div>
+                    <h3 class="clearfix">
+                        <span class="fl">{$userinfo.username}</span>
+                        <a href="{:url('Member/setting')}"><span class="editBtn fl"></span></a>
+                    </h3>
+                    <h4 class="mt7">{$userinfo.addr} | {$userinfo.profession}</h4>
+                </div>
+                <div class="mcData">
+                    <ul class="clearfix">
+                        <li>
+                            <a href="{:url('Member/myrelease',['type'=>0])}">
+                                <div id="product" class="fontsize-24 fontbold color-grey-5">
+                                    
+                                </div>
+                                <h4>成果</h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{:url('Member/myrelease',['type'=>1])}">
+                                <div id="science" class="fontsize-24 fontbold color-grey-5">
+                                    
+                                </div>
+                                <h4>科技人</h4>
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <a href="mycollect.html">
+                                <div class="fontsize-24 fontbold color-grey-5">
+                                    20
+                                </div>
+                                <h4>收藏</h4>
+                            </a>
+                        </li> -->
+                    </ul>
+                </div>
+                <div class="releaBtn">
+                    <a href="{:url('Release/index',['type'=>1])}">
+                        <button class="btn btn-red-1"><span>发布</span></button>
+                    </a>
+                </div>
+                <div class="signOut">
+                    <h3 class="color-grey-4" onclick="loginout();">退出登录</h3>
+                </div>
+            </div>
+            <script type="text/javascript" src="__JS__/jquery.js" ></script>
+            <script type="text/javascript">
+                $(function(){
+                    var userid = {$userinfo.userid};
+                    $.post("{:url('Member/getNumber')}",{userid:userid},function(data){
+                            if (data) {
+                                $("#product").html(data.product);
+                                $("#science").html(data.science);
+                            }
+                    });
+                });
+            </script>

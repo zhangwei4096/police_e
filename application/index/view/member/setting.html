@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title}</title>
+<link href="__JS__/layui/css/layui.css" rel="stylesheet" type="text/css"/>
+<link href="__CSS__/style.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="__JS__/jquery.js" ></script>
+<script type="text/javascript" src="__JS__/layer/layer.js" ></script>
+<script type="text/javascript" src="__JS__/layui/layui.js" ></script>
+<script type="text/javascript" src="__JS__/common.js" ></script>
+</head>
+<body>
+    {include file="public/menu" /}
+    <!--成果详情-->
+    <div class="achieveText mainW">
+        <h4 class="miniM">
+            您的位置：
+            <a href="{:url('Index/index')}"><span  class="mr10">首页</span></a>
+            >
+            <a href="{:url('Member/index')}"><span class="mrl10">个人中心</span></a>
+            >
+            <span class="color-red mrl10">账号设置</span>
+        </h4>
+        <div class="searList mt18 clearfix">
+            <!--左边栏-->
+            {include file="public/left" /}
+            <div class="mcMain fl">
+                <div class="mcList">
+                    <div class="mclTle clearfix">
+                        <div class="mcltName">
+                            账号设置
+                        </div>
+                    </div>
+                    <div class="setForm">
+                        <!--用户名-->
+                        <div class="setIpt">
+                            <label class="setLable"><h4>用户名</h4></label>
+                            <h4 class="setModify color-grey-5">
+                                <b>{$userinfo.username}</b><span class="color-blue modify ml10">修改</span>
+                            </h4>
+                            <div class="setEdit clearfix" style="display: none;">
+                                <input type="text" name="username" placeholder="请输入用户名" class="fl"/>
+                                <label class="saveBtn fl ml10"><h4 class="color-blue">保存</h4></label>
+                            </div>
+                        </div>
+                        <!--密码-->
+                        <div class="setIpt">
+                            <label class="setLable"><h4>密码</h4></label>
+                            <h4 class="setModify color-grey-5">
+                                <b>*****</b><span class="color-blue modify ml10">修改</span>
+                            </h4>
+                            <div class="setEdit clearfix" style="display: none;">
+                                <input type="text"  name="password" placeholder="请输入密码" class="fl"/>
+                                <label class="saveBtn fl ml10"><h4 class="color-blue">保存</h4></label>
+                            </div>
+                        </div>
+                        <!--头像-->
+                        <div class="setIpt">
+                            <label class="setLable"><h4>头像</h4></label>
+                            <img src="__IMG__/user/news.png" width="42" height="42"/>
+                        </div>
+                        <!--手机号-->
+                        <div class="setIpt clearfix">
+                            <label class="setLable"><h4>手机号</h4></label>
+                            <h4 class="setModify color-grey-5 fl">
+                                {$userinfo.mobile}<!--<span class="color-blue modify ml10">修改</span>-->
+                            </h4>
+                            <div class="setEdit clearfix fl" style="display: none;">
+                                <input type="number" name="mobile" placeholder="请输入手机号" class="fl" id="uTel"/>
+                                <input type="text" placeholder="请输入验证码" class="fl codeIpt" id="uCode"/>
+                                <button class="btn btn-blue-1 fl codeBtn" disabled="disabled" id="codeBtn">发送验证码</button>
+                                <label class="saveTel fl ml10" id="saveTel"><h4 class="color-blue">保存</h4></label>
+                                <label class="saveBtn fl ml10" id="saveTel"><h4 class="color-blue">取消</h4></label>
+                            </div>
+                            <label class="ml20 fl"><h4>仅自己可见</h4></label>
+                        </div>
+                        <!--邮箱-->
+                        <div class="setIpt clearfix">
+                            <label class="setLable"><h4>邮箱</h4></label>
+                            <h4 class="setModify color-grey-5 fl">
+                                {$userinfo.email}<!--<span class="color-blue modify ml10">修改</span>-->
+                            </h4>
+                            <div class="setEdit clearfix fl" style="display: none;">
+                                <input type="email" name="email" placeholder="请输入邮箱地址" class="fl"/>
+                                <label class="saveBtn fl ml10"><h4 class="color-blue">保存</h4></label>
+                            </div>
+                            <label class="ml20 fl"><h4>仅自己可见</h4></label>
+                        </div>
+                        <!--性别-->
+ 
+                        <div class="setIpt clearfix">
+                            <label class="setLable"><h4>性别</h4></label>
+                            <div class="setSex fl clearfix">
+                                <input type="radio" id="male" name="sex" value="0" class="fl" {eq name="$userinfo.sex" value="0"} checked="checked" {/eq} />
+                                <label for="male" class="fl">男</label>
+                            </div>
+                            <div class="setSex fl clearfix ml15">
+                                <input type="radio" id="female" name="sex" value="1" class="fl" {eq name="$userinfo.sex" value="1"}  checked="checked" {/eq} />
+                                <label for="female" class="fl">女</label>
+                            </div>
+                        </div>
+                        <script>
+                            $('input[type="radio"]').change(function(){
+                                var sex = $('input[type="radio"]:checked').val();
+                                $.post("{:url('Member/save')}",{sex:sex},function(data){
+                                        if (data.msg == 'ok') {
+                                            layer.msg(data.data);
+                                        }
+                                });
+                            });
+                        </script>
+                        <!--现居地-->
+                       
+                       <form class="layui-form" action="{:url('Member/save')}">
+                            <div class="setIpt">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label setLable"><h4>现居</h4></label>
+                                    <div class="layui-input-block">
+                                        <select name="addr" lay-verify="required">
+                                            <option value="{$userinfo.addr}">{$userinfo.addr}</option>
+                                            <option value="北京">北京</option>
+                                            <option value="上海">上海</option>
+                                            <option value="广州">广州</option>
+                                            <option value="深圳">深圳</option>
+                                            <option value="杭州">杭州</option>
+                                            <option value="成都">成都</option>
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--职业-->
+                            <div class="setIpt">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label setLable"><h4>职业</h4></label>
+                                    <div class="layui-input-block">
+                                        <select name="profession" lay-verify="required">
+                                            <option value="{$userinfo.profession}">{$userinfo.profession}</option>
+                                            <option value="自由职业者">自由职业者</option>
+                                            <option value="IT工程师">IT工程师</option>
+                                            <option value="教师">教师</option>
+                                            <option value="医生">医生</option>
+                                            <option value="销售">销售</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--个性签名-->
+                            <!-- <div class="setIpt">
+                                <div class="maxLen">50</div>
+                                <label class="setLable"><h4>签名</h4></label>
+                                <input type="text" placeholder="请填写个性签名" value="" class="w100" maxlength="50"/>
+                            </div> -->
+                            <!--个人简介-->
+                            <div class="setIpt">
+                                <div class="maxLen">2000</div>
+                                <label class="setLable"><h4>简介</h4></label>
+                                <input type="text" name="remark" placeholder="个人简介..." value="{$userinfo.remark}" class="w100" maxlength="2000"/>
+                            </div>
+                            <div class="saveSet">
+                                <button class="btn btn-blue-1">保存</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--footer-->
+   {include file="public/footer" /}
+    <script type="text/javascript">
+        layui.use('form', function(){
+            var form = layui.form;
+            //监听提交
+            form.on('submit(formDemo)', function(data){
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
+        $(function(){
+            //修改
+            $(".setIpt .modify").click(function(){
+                var parent=$(this).parents(".setIpt");
+                parent.find(".setModify").hide();
+                parent.find(".setEdit").show();
+            })
+            //保存修改
+            $(".setIpt .saveBtn").click(function(){
+                var parent=$(this).parents(".setIpt");
+                parent.find(".setModify").show();
+                parent.find(".setEdit").hide();
+                var newValue = parent.find(".setEdit input").val();
+                var newName     = parent.find(".setEdit input").prop('name');
+                var array       = {};
+                array[newName] = newValue;
+                if(newValue!='' || newValue!=null){
+                    
+                    //发送post异步请求
+                    $.post("{:url('Member/save')}",array,function(data){
+                            if (data.msg == 'ok') {
+                                //parent.find(".setModify b").html(newValue);
+                                layer.msg(data.data);
+                                history.go();
+                            }
+                    });
+                    
+                }
+            })
+
+            //绑定手机号
+            //保存手机号
+            $("#saveTel").click(function(){
+                var parent=$(this).parents(".setIpt");
+                var uCode=$("#uCode").val();
+                var uTel=$("#uTel").val();
+                if(uTel==""||uTel==null){
+                    layer.msg("手机号码不能为空");
+                    return false;
+                }
+                if(!uTel.match(/^1[3|4|5|8|7][0-9]\d{8}$/)){
+                    layer.msg("请输入正确的手机号");
+                    return false;
+                }
+                if(uCode==""||uCode==null){
+                    layer.msg("请输入验证码");
+                    return false;
+                }
+                parent.find(".setModify").show();
+                parent.find(".setEdit").hide();
+            })
+            //发送验证码
+            $("#uTel").bind("input propertychange",function(){
+                var uTel=$("#uTel").val();
+                if(uTel.match(/^1[3|4|5|8|7][0-9]\d{8}$/)&&uTel!=""&&uTel!=null){
+                    $("#codeBtn").removeAttr("disabled");
+                }else{
+                    $("#codeBtn").attr("disabled","disabled");
+                }
+            })
+            $("#codeBtn").click(function(){
+                $(this).attr('disabled','disabled');
+                $(this).html('<span>10</span>s');
+                var mySecond=parseInt($(this).find('span').html());
+                var _this=$(this);
+                var timer=setInterval(function(){
+                    if(mySecond==0){
+                        _this.removeAttr("disabled");
+                        _this.html('重新发送');
+                        clearInterval(timer);
+                    }else{
+                        mySecond--;
+                    }
+                    _this.find('span').html(mySecond);
+                },1000);
+            })
+        })
+    </script>
+</body>
+</html>

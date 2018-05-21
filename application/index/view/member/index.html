@@ -1,0 +1,107 @@
+{include file="public/head" /}
+<body>
+    {include file="public/menu" /}
+    <!--成果详情-->
+    <div class="achieveText mainW">
+        <h4 class="miniM">
+            您的位置：
+            <a href="{:url('Index/index')}"><span  class="mr10">首页</span></a>
+            >
+            <span class="color-red mrl10">个人中心</span>
+        </h4>
+        <div class="searList mt18 clearfix">
+            {include file="public/left" /}
+            <div class="mcMain fl">
+                <!--我的发布-->
+                <div class="mcList">
+                    <div class="mclTle clearfix">
+                        <a href="{:url('Member/myrelease',['type'=>0])}">
+                            <h5 class="color-grey-4 fr mcMore">查看更多</h5>
+                            <div class="mcltName">
+                                成果
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mcT_list color-grey-1">
+                        <ul>
+                            {volist name="product" id="list"}
+                            <li>
+                                <h5 class="fr color-grey-2">{$list.add_time}</h5>
+                                <div class="clearfix">
+                                    <div class="ellipsis fl cmTXT">
+                                        <a href="{:url('Product/more',['id'=>$list['id']])}">{$list.title}</a>
+                                    </div>
+                                    <h5 class="fl mcTData">
+                                        <span class="forView">{$list.views}</span>
+                                        <!-- <span class="forCommend">55</span> -->
+                                    </h5>
+                                </div>
+                            </li>
+                            {/volist}
+                        </ul>
+                    </div>
+                </div><!--我的发布-->
+                <!--我的消息-->
+                <div class="mcList">
+                    <div class="mclTle clearfix">
+                        <a href="{:url('Member/myrelease',['type'=>0])}">
+                            <h5 class="color-grey-4 fr mcMore">查看更多</h5>
+                            <div class="mcltName">
+                                科技人
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mcT_list color-grey-1">
+                        <ul>
+                            {volist name="science" id="list"}
+                            <li>
+                                <h5 class="fr color-grey-2">{$list.add_time}</h5>
+                                <div class="clearfix">
+                                    <div class="ellipsis fl cmTXT">
+                                        <a href="{:url('Secience/more',['id'=>$list['id']])}">{$list.title}</a>
+                                    </div>
+                                    <h5 class="fl mcTData">
+                                        <span class="forView">{$list.views}</span>
+                                        <!-- <span class="forCommend">55</span> -->
+                                    </h5>
+                                </div>
+                            </li>
+                            {/volist}
+                        </ul>
+                    </div>
+                </div><!--我的消息-->
+                <!--我的收藏-->
+                <!-- <div class="mcList">
+                    <div class="mclTle clearfix">
+                        <a href="mycollect.html">
+                            <h5 class="color-grey-4 fr mcMore">查看更多</h5>
+                            <div class="mcltName">
+                                我的收藏
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mcT_list color-grey-1">
+                        <ul>
+                            <li>
+                                <h5 class="fr color-grey-2">2016-01-18 20:38</h5>
+                                <div class="clearfix">
+                                    <div class="ellipsis fl cmTXT">
+                                        防刺服通常和哪些警用装备配合使用？
+                                    </div>
+                                    <h5 class="fl mcTData">
+                                        <span class="forView">526</span>
+                                        <span class="forCommend">55</span>
+                                    </h5>
+                                </div>
+                            </li>
+                          
+                        </ul>
+                    </div>
+                </div> --><!--我的收藏-->
+            </div>
+        </div>
+    </div>
+    <!--footer-->
+    {include file="public/footer" /}
+</body>
+</html>
