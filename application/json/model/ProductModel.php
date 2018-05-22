@@ -22,10 +22,9 @@ class ProductModel extends Model{
     }
     
     public function getKey($key_words,$info){
-        
         $result = [
             'result' => 1,
-            'total'  => Db::name('product')->where('title','like',"%{$key_words}%")->page($info['page'],$info['rows'])->count(),
+            'total'  => Db::name('product')->where('title','like',"%{$key_words}%")->count(),
             'message'    => 'ok',
             'rows'   => Db::name('product')->where('title','like',"%{$key_words}%")->page($info['page'],$info['rows'])->select()
         ];

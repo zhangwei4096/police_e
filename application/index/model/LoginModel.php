@@ -29,7 +29,7 @@ class LoginModel extends Model{
         }
         //以上验证都通过的时候
         $user = Db::name('user')->whereOr('email',$info['username'])->whereOr('mobile',$info['username'])->find();
-        if ($user && $user['password'] == md5($info['password']) && $user['audit_flag'] == 1 && $user['delete_flag'] == 'false'){
+        if ($user && $user['password'] == md5($info['password']) && $user['audit_flag'] == 1 && $user['delete_flag'] == 'false' &&$user['status']==0){
             //用户验证通过
            Session::set('username',$user['username']); //用户名
            Session::set('userid',$user['userid']);             //用户的唯一ID

@@ -23,6 +23,7 @@ class NewsModel extends Model{
     }
     
     public function queryKey($key,$info){
+     
         $result = [
             'result' => 1,
             'total'  => Db::name('news')->where('title','like',"%{$key}%")->count(),

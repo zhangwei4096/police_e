@@ -26,8 +26,7 @@ class ScienceModel extends Model{
         //查询科技人
         $result = [
             'result' => 1,
-            'total'  => Db::name('science')->where('title','like',"%{$key_words}%")
-            ->page($info['page'],$info['rows'])->count(),
+            'total'  => Db::name('science')->where('title','like',"%{$key_words}%")->count(),
             'message'    => 'ok',
             'rows'   => Db::name('science')->where('title','like',"%{$key_words}%")
             ->page($info['page'],$info['rows'])->select()

@@ -143,13 +143,14 @@
         var row = $('#dg').datagrid('getSelected');
         if(row){
             $.messager.confirm('Confirm','您确定要删除 '+row.title+' 这篇新闻吗?',function(f){
-                $.post("{:url('/json/Science/delete')}",{id:row.id},function(data){
-                        // var data = eval('(' + data + ')');
+                if(f){
+                	$.post("{:url('/json/Science/delete')}",{id:row.id},function(data){
                         if (data.result == 1) {
                             message('当前新闻删除成功');
                             $('#dg').datagrid('reload');
                         }
-                });
+                	});
+                }
             });
         }else{
             message();

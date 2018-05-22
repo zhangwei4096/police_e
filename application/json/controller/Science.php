@@ -23,7 +23,7 @@ class Science extends Controller{
         $request = Request::instance();
         if ($request->isPost()){
             $info            = $request->param(); 
-            $key_words = $request->param('key_words');
+            $key_words = $request->post('key_words');
             if (@$key_words){
                 //有关键字提交过来
                 $result = (new ScienceModel())->queryScience($key_words,$info);
