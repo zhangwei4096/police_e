@@ -42,6 +42,11 @@ class UserModel extends Model{
     public function addUser($info){
         //用户添加  需要检查 用户名&邮箱&电话号码是否有重复的
         $user = new UserModel();
+        //检查密码是否设置 没有设置就默认为123456
+        if ($info['password'] == null){
+            $info['password'] = '123456';
+        }
+        
         $user->data = [
                 'username' => $info['username'],
                 'password'  => md5($info['password']),
