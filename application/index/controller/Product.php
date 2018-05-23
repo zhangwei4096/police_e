@@ -87,11 +87,19 @@ class Product extends Controller{
         }  
         
 
- 
+        //根据userid 获取用户的username 获取发布人
+        $username = Db::name('user')->where('userid',$product['userid'])->column('username')[0];
+        
+        //热门推荐 根据点击量来排序
+        $hots = ProductModel::all(function($query){
+            $query->order('views desc')->limit(0,8);
+        });
         
         $this->assign([
             'title'   => '成果-'.$product['title'],   //标题
             'product' => $product,
+            'hots'      => $hots,  //热门推荐
+            'username' => $username, //发布人
             'table' => $table
         ]);
         return view();

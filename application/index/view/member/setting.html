@@ -55,6 +55,19 @@
                                 <label class="saveBtn fl ml10"><h4 class="color-blue">保存</h4></label>
                             </div>
                         </div>
+                        <!--真实姓名-->
+                        <div class="setIpt">
+                            <label class="setLable"><h4>真实姓名</h4></label>
+                            <h4 class="setModify color-grey-5">
+                                <b>{$userinfo.real_name}</b><span class="color-blue modify ml10">修改</span>
+                            </h4>
+                            <div class="setEdit clearfix" style="display: none;">
+                                <input type="text" name="real_name" placeholder="请输入您的真实姓名" class="fl"/>
+                                <label class="saveBtn fl ml10"><h4 class="color-blue">保存</h4></label>
+                            </div>
+                        </div>
+
+
                         <!--头像-->
                         <div class="setIpt">
                             <label class="setLable"><h4>头像</h4></label>
@@ -190,22 +203,31 @@
                 var parent=$(this).parents(".setIpt");
                 parent.find(".setModify").show();
                 parent.find(".setEdit").hide();
-                var newValue = parent.find(".setEdit input").val();
+                var newValue    = parent.find(".setEdit input").val();
                 var newName     = parent.find(".setEdit input").prop('name');
                 var array       = {};
-                array[newName] = newValue;
-                if(newValue!='' || newValue!=null){
-                    
-                    //发送post异步请求
+                array[newName]  = newValue;
+                if(newValue=="" || newValue==null){                                     
+                    layer.msg('不能为空');
+                    return false;
+                }else{
+                     //发送post异步请求
                     $.post("{:url('Member/save')}",array,function(data){
                             if (data.msg == 'ok') {
                                 //parent.find(".setModify b").html(newValue);
+                                //history.go();
+                                if (newName == 'password') {
+                                    parent.find(".setModify b").html('******');
+                                }else{
+                                    parent.find(".setModify b").html(newValue);
+                                }
+
                                 layer.msg(data.data);
-                                history.go();
+                                
                             }
                     });
-                    
                 }
+
             })
 
             //绑定手机号

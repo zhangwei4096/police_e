@@ -43,8 +43,16 @@ class News extends Controller{
             
              $news       = NewsModel::get($id);
              $news->setInc('views',1,30);  
+             
+             
+             //热门推荐 根据点击量来排序
+             $hots = NewsModel::all(function($query){
+                 $query->order('views desc')->limit(0,10);
+             });
+             
              $this->assign([
                  'title'   => '新闻-'.$news['title'],   //标题
+                 'hots'  =>$hots,
                  'news' => $news
              ]);
              return view();

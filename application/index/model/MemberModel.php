@@ -37,6 +37,16 @@ class MemberModel extends  Model{
                ];
                return $result;
            }
+       }else if (array_keys($data)[0] == 'real_name'){
+           //修改真实姓名
+           if (self::update($data)){
+               $result = [
+                   'msg' => 'ok',
+                   'data' => '真实姓名修改成功'
+               ];
+               return $result;
+           }
+           
        }else if (array_keys($data)[0] == 'sex'){
            //执行性别修改操作
            if (self::update($data)){

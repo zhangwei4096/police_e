@@ -14,47 +14,23 @@
             <span class="color-red mrl10 pstTle ellipsis fl">{$data.title}</span>
         </h4>
         <div class="searList">
-         <!--    <div class="searWord fr recomList">
+        <!--热门推荐-->
+         <div class="searWord fr recomList">
                 <h3 class="wordTle color-grey-5 recomTle"><span>热门推荐</span></h3>
                 <ul class="clearfix tcomList_1">
-                    <li class="video">
-                        <a href="techText.html">
+                    {volist name="hots" id="list"}
+                    <li {if condition="($list['short_video'] !=null)" } class="video" {/if} >
+                        <a href="{:url('Secience/more',['id'=>$list['id']])}">
                             <div class="tcomImg">
-                                <div class="videoIcon"></div>
-                                <img src="__IMG__/user/commend.png" width="233" height="114"/>
+                                <div {if condition="($list['short_video'] !=null)"} class="videoIcon" {/if} ></div>
+                                <img src="{$list.thumb}" width="233" height="114"/>
                             </div>
-                            <h4 class="ellipsis color-grey">情系群众，做老百姓的“贴心人”情系群众，做老百姓的“贴心人”</h4>
+                            <h4 class="ellipsis color-grey">{$list.title}</h4>
                         </a>
                     </li>
-                    <li class="">
-                        <a href="techText.html">
-                            <div class="tcomImg">
-                                <div class="videoIcon"></div>
-                                <img src="__IMG__/user/commend.png" width="233" height="114"/>
-                            </div>
-                            <h4 class="ellipsis color-grey">情系群众，做老百姓的“贴心人”情系群众，做老百姓的“贴心人”</h4>
-                        </a>
-                    </li>
-                    <li class="video">
-                        <a href="techText.html">
-                            <div class="tcomImg">
-                                <div class="videoIcon"></div>
-                                <img src="__IMG__/user/commend.png" width="233" height="114"/>
-                            </div>
-                            <h4 class="ellipsis color-grey">情系群众，做老百姓的“贴心人”情系群众，做老百姓的“贴心人”</h4>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="techText.html">
-                            <div class="tcomImg">
-                                <div class="videoIcon"></div>
-                                <img src="__IMG__/user/commend.png" width="233" height="114"/>
-                            </div>
-                            <h4 class="ellipsis color-grey">情系群众，做老百姓的“贴心人”情系群众，做老百姓的“贴心人”</h4>
-                        </a>
-                    </li>
+                    {/volist}
                 </ul>
-                <ul class="clearfix tcomList_2">
+                <!--<ul class="clearfix tcomList_2">
                     <li>
                         <a href="techText.html">
                             <h4 class="ellipsis">防刺服通常和哪些警用装备配合使用？</h4>
@@ -85,15 +61,15 @@
                             <h4 class="ellipsis">防刺服通常和哪些警用装备配合使用？</h4>
                         </a>
                     </li>
-                </ul>
-            </div> -->
+                </ul> -->
+            </div>
             <div class="searBox">
                 <!--文章-->
                 <div class="achiBox">
                     <!--文章标题-->
                     <div class="achiTle">
                         <h1>{$data.title}</h1>
-                        <h5 class="color-grey-4">警e网 发布于
+                        <h5 class="color-grey-4">{$username} 发布于
                         <?php echo date('Y-m-d H:i:s',strtotime($data['add_time']));?>
                             <span class="ml15">浏览：{$data.views}次</span>
                         </h5>
@@ -114,8 +90,9 @@
                     {$data.content}
                 </div>
                 <!--评论区-->
-               <!--  <div class="commend">
-                    <h3>全部评论<span class="color-grey-4 ml15">115</span></h3>
+
+                <div class="commend">
+                    <h3>全部评论<span class="color-grey-4 ml15">{$total}</span></h3>
                     <div class="cmdBox">
                         <div class="clearfix">
                             <div class="cmdHead fl">
@@ -124,14 +101,17 @@
                             <div class="cmdArea fl">
                                 <div class="releaIpt">
                                     <div class="maxLen">2000</div>
-                                    <textarea name="" placeholder="说点什么吧..." maxlength="2000"></textarea>
+                                    <textarea name="content" placeholder="说点什么吧..." maxlength="2000"></textarea>
                                 </div>
                                 <div class="releaIpt clearfix mt16">
-                                    <button type="button" class="btn fr cmdBtn btn-lg">发表评论</button>
+                                    <button type="button" id="send" class="btn fr cmdBtn btn-lg">发表评论</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    
+                    {volist name="comments" id="list"}     <!--截取多少条评论出来-->
                     <div class="cmdBox">
                         <div class="clearfix">
                             <div class="cmdHead fl">
@@ -139,119 +119,150 @@
                             </div>
                             <div class="fl">
                                 <div class="cmdArea">
-                                    <h5 class="color-grey-2"><span class="color-blue-1">浮生若梦骄傲 </span>&nbsp;|&nbsp;&nbsp;2016-01-18 20:38</h5>
-                                    <p class="fontsize-15 color-grey-5 cmdText">自动白平衡回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等操作提供警告音曝光模式 自动曝光自动白平衡回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等</p>
+                                    <h5 class="color-grey-2"><span class="color-blue-1">{$list.username}</span>&nbsp;|&nbsp;&nbsp;{$list.add_time}</h5>
+                                    <p class="fontsize-15 color-grey-5 cmdText">{$list.content}</p>
                                     <div class="cmdOpt clearfix">
                                         <div class="clearfix fr">
                                             <div class="replyBtn fl">
                                                 回复
                                             </div>
-                                            <div class="fablurBtn fl">
+                                            <!-- <div class="fablurBtn fl">
                                                 12
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
-                                <div class="cmdArea replyArea">
-                                    <h5 class="color-grey-2"><span class="color-blue-1">小确幸 </span>回复<span class="color-blue-1">浮生若梦骄傲 </span></h5>
-                                    <p class="fontsize-15 color-grey-5 cmdText">自动白平衡回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等操作提供警告音曝光模式 自动曝光自动白平衡回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等</p>
-                                    <div class="cmdOpt clearfix">
-                                        <div class="clearfix fr">
-                                            <div class="replyBtn fl">
-                                                回复
-                                            </div>
-                                            <div class="fablurBtn fl">
-                                                12
+                                {volist name="list['_child']" id="child"}
+                                    <div class="cmdArea replyArea">
+                                        <h5 class="color-grey-2"><span class="color-blue-1">{$child.username} </span>回复<span class="color-blue-1"> {$list.username}</span></h5>
+                                        <p class="fontsize-15 color-grey-5 cmdText">{$child.content}</p>
+                                        <div class="cmdOpt clearfix">
+                                            <div class="clearfix fr">
+                                               <!--  <div class="replyBtn fl">
+                                                    回复
+                                                </div>
+                                                <div class="fablurBtn fl">
+                                                    12
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                {/volist}
                             </div>
                         </div>
                         <div class="rpl_input">
+
                             <div class="releaIpt">
-                                <input type="text" placeholder="回复浮生若梦骄傲..."/>
+                                <input type="text" name="{$list.id}" placeholder="回复{$list.username}..."/>
                             </div>
                             <div class="releaIpt clearfix mt7">
                                 <button type="button" class="btn fr cmdBtn btn-lg">评论</button>
                                 <button type="button" class="btn fr cancleBtn btn-lg">取消</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="cmdBox">
-                        <div class="clearfix">
-                            <div class="cmdHead fl">
-                                <img src="__IMG__/user/exhibide.png" width="54" height="54"/>
-                            </div>
-                            <div class="fl">
-                                <div class="cmdArea">
-                                    <h5 class="color-grey-2"><span class="color-blue-1">浮生若梦骄傲 </span>&nbsp;|&nbsp;&nbsp;2016-01-18 20:38</h5>
-                                    <p class="fontsize-15 color-grey-5 cmdText">自动白平衡回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等操作提供警告音曝光模式 自动曝光自动白平衡回放支持照片、视频回放声音提示 在开启最像、照相、停止录像、低电量等</p>
-                                    <div class="cmdOpt clearfix">
-                                        <div class="clearfix fr">
-                                            <div class="replyBtn fl">
-                                                回复
-                                            </div>
-                                            <div class="fablurBtn fl">
-                                                12
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="rpl_input">
-                            <div class="releaIpt">
-                                <input type="text" placeholder="回复浮生若梦骄傲..."/>
-                            </div>
-                            <div class="releaIpt clearfix mt7">
-                                <button type="button" class="btn fr cmdBtn btn-lg">评论</button>
-                                <button type="button" class="btn fr cancleBtn btn-lg">取消</button>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+                    </div>                
+                {/volist}
+                </div>
+                <!--评论区结束-->
             </div>
         </div>
     </div>
     <!--footer-->
    {include file="public/footer" /}
     <script type="text/javascript">
-        // $(function(){
-        //     //回复
-        //     $(".replyBtn").click(function(){
-        //         $(this).addClass("active");
-        //         var parent=$(this).parents(".cmdArea");
-        //         var pat=$(this).parents(".cmdBox");
-        //         pat.find(".rpl_input").show();
-        //     })
-        //     //取消回复
-        //     $(".cancleBtn").click(function(){
-        //         var parent=$(this).parents(".rpl_input");
-        //         parent.hide();
-        //     })
-        //     //点赞
-        //     $(".fablurBtn").click(function(){
-        //         if($(this).hasClass("active")){
-        //             $(this).removeClass("active");
-        //         }else{
-        //             $(this).addClass("active");
-        //         }
-        //     })
-        //     //限制textarea字数在2000字以内
-        //     $(".releaIpt textarea").on("input propertychange", function(e) {  
-        //         var $this = $(this),_val=$this.val();
-        //         if (_val.length >2000) {  
-        //             layer.msg("最多输入2000个字");
-        //             $this.val(_val.substring(0, 2000));  
-        //         } 
-        //     }); 
-        // })
-        // myPlayer = neplayer('my-video', {errorDisplay:false}, function() {});
-        // var playerTech=videojs("my-video").tech({ IWillNotUseThisInPlugins: true });
-        // myPlayer.onPlayState(1,function(){$('#palyBtn').hide();});
-        // myPlayer.onPlayState(2,function(){$('#palyBtn').show();});
-        // $('#palyBtn').click(function(){myPlayer.play();})
+        $(function(){
+            //发表评论
+            //
+            var userid = <?php if (session('userid')) { echo session('userid');}else{ echo 0;}  ?>
+
+            $("#send").click(function(){
+                var content   = $('textarea[name="content"]').val();
+                var arc_id    = {$data.id};
+                //var user_id   = {$Think.session.userid};
+                var comment_id= 0;
+                if (content =="" || content ==null) {
+                    layer.msg('评论区不能为空', {icon: 5});
+                    return false;
+                }
+                if (userid ==0) {
+                    //没有登录提示登录
+                    layer.msg('您还没有登录,请登录后再执行操作');
+                    return false;
+                }
+                //执行POST请求
+                $.post("{:url('Secience/sendComment')}",
+                    {arc_id:arc_id,content:content,comment_id:comment_id},function(data){
+
+                        if (data.msg=='ok') {
+                            layer.msg(data.data);
+                        }else{
+                            layer.msg('发表评论失败',{icon:5});
+                        }
+                });
+            });
+            
+            //回复
+            $(".replyBtn").click(function(){
+                $(this).addClass("active");
+                var parent=$(this).parents(".cmdArea");
+                var pat=$(this).parents(".cmdBox");
+                pat.find(".rpl_input").show();
+            })
+            //回复评论
+            $(".mt7 button").click(function(){
+                //var parent=$(this).parents(".releaIpt");
+                var pat         =  $(this).parents(".rpl_input");
+                var content     =  pat.find("input").val();
+                var comment_id  =  pat.find("input").prop('name');
+                var arc_id      =  {$data.id};
+                if (content==""||content==null) {
+                    layer.msg('回复评论不能为空',{icon:5});
+                    return false;
+                }
+
+                if (userid ==0) {
+                    //没有登录提示登录
+                    layer.msg('您还没有登录,请登录后再执行操作');
+                    return false;
+                }
+                //执行POST
+                $.post("{:url('Secience/sendComment')}",{content:content,arc_id:arc_id,comment_id:comment_id},function(data){
+                    if (data.msg=='ok') {
+                        layer.msg(data.data);
+                    }else{
+                        layer.msg('发表评论失败',{icon:5});
+                    }
+                })
+
+            });
+
+            //取消回复
+            $(".cancleBtn").click(function(){
+                var parent=$(this).parents(".rpl_input");
+                parent.hide();
+            })
+            //点赞
+            $(".fablurBtn").click(function(){
+                if($(this).hasClass("active")){
+                    $(this).removeClass("active");
+                }else{
+                    $(this).addClass("active");
+                }
+            })
+            //限制textarea字数在2000字以内
+            $(".releaIpt textarea").on("input propertychange", function(e) {  
+                var $this = $(this),_val=$this.val();
+                if (_val.length >2000) {  
+                    layer.msg("最多输入2000个字");
+                    $this.val(_val.substring(0, 2000));  
+                } 
+            }); 
+        })
+        myPlayer = neplayer('my-video', {errorDisplay:false}, function() {});
+        var playerTech=videojs("my-video").tech({ IWillNotUseThisInPlugins: true });
+        myPlayer.onPlayState(1,function(){$('#palyBtn').hide();});
+        myPlayer.onPlayState(2,function(){$('#palyBtn').show();});
+        $('#palyBtn').click(function(){myPlayer.play();})
     </script>
 </body>
 </html>

@@ -15,75 +15,22 @@
             <span class="color-red mrl10">成果详情</span>
         </h4>
         <div class="searList">
-    <!--        <div class="searWord fr recomList">
-                <h3 class="wordTle color-grey-5 recomTle"><span>推荐新闻</span></h3>
+
+            <div class="searWord fr recomList">
+                <h3 class="wordTle color-grey-5 recomTle"><span>推荐成果</span></h3>
                 <ul class="clearfix">
+                    {volist name="hots" id="list"}
                     <li class="ellipsis">
                         <a href="achieveText.html">
                             <div class="fr color-grey-4 recomData">
-                                680
+                                {$list.views}
                             </div>
-                            防刺服通常和哪些警用装备配合使用？
+                            {$list.title}
                         </a>
                     </li>
-                    <li class="ellipsis">
-                        <a href="achieveText.html">
-                            <div class="fr color-grey-4 recomData">
-                                680
-                            </div>
-                            防刺服通常和哪些警用装备配合使用？
-                        </a>
-                    </li>
-                    <li class="ellipsis">
-                        <a href="achieveText.html">
-                            <div class="fr color-grey-4 recomData">
-                                680
-                            </div>
-                            防刺服通常和哪些警用装备配合使用？
-                        </a>
-                    </li>
-                    <li class="ellipsis">
-                        <a href="achieveText.html">
-                            <div class="fr color-grey-4 recomData">
-                                680
-                            </div>
-                            防刺服通常和哪些警用装备配合使用？
-                        </a>
-                    </li>
-                    <li class="ellipsis">
-                        <a href="achieveText.html">
-                            <div class="fr color-grey-4 recomData">
-                                680
-                            </div>
-                            防刺服通常和哪些警用装备配合使用？
-                        </a>
-                    </li>
-                    <li class="ellipsis">
-                        <a href="achieveText.html">
-                            <div class="fr color-grey-4 recomData">
-                                680
-                            </div>
-                            防刺服通常和哪些警用装备配合使用？
-                        </a>
-                    </li>
-                    <li class="ellipsis">
-                        <a href="achieveText.html">
-                            <div class="fr color-grey-4 recomData">
-                                680
-                            </div>
-                            防刺服通常和哪些警用装备配合使用？
-                        </a>
-                    </li>
-                    <li class="ellipsis">
-                        <a href="achieveText.html">
-                            <div class="fr color-grey-4 recomData">
-                                680
-                            </div>
-                            防刺服通常和哪些警用装备配合使用？
-                        </a>
-                    </li>
+                    {/volist}
                 </ul>
-                <div class="swiper-container miniSwiper mt10">
+               <!-- <div class="swiper-container miniSwiper mt10">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide" style="background-image: url(images/user/productImg2.png);">
                             <a href="achieveText.html">
@@ -96,15 +43,15 @@
                             </a>
                         </div>
                     </div>
-                </div>
-            </div> -->
+                </div>-->
+            </div> 
             <div class="searBox">
                 <!--文章-->
                 <div class="achiBox">
                     <!--文章标题-->
                     <div class="achiTle">
                         <h1>{$product.title}</h1>
-                        <h5 class="color-grey-4">警e网 发布于{$product.add_time}<span class="ml15">浏览：{$product.views}次</span></h5>
+                        <h5 class="color-grey-4">{$username} 发布于{$product.add_time}<span class="ml15">浏览：{$product.views}次</span></h5>
                     </div>                  
                     <!--文章参数-->
                     <table border="0" cellspacing="0" cellpadding="0" class="paraTable">
