@@ -35,7 +35,7 @@ class Secience extends Controller{
         //使用递归来处理评论
         $tree = $this->getTree($comments, 0);
         //根据userid 获取用户的username
-        $username = Db::name('user')->where('userid',$secience['userid'])->column('username')[0];
+        $username = @Db::name('user')->where('userid',$secience['userid'])->column('username')[0];
         //热门推荐 根据点击量来排序
         $hots  = ScienceModel::all(function($query){
                 $query->order('views desc')->limit(0,4);

@@ -88,7 +88,7 @@ class Product extends Controller{
         
 
         //根据userid 获取用户的username 获取发布人
-        $username = Db::name('user')->where('userid',$product['userid'])->column('username')[0];
+        $username = @Db::name('user')->where('userid',$product['userid'])->column('username')[0];
         
         //热门推荐 根据点击量来排序
         $hots = ProductModel::all(function($query){

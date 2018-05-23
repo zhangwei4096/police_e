@@ -21,7 +21,7 @@
                 <ul class="clearfix">
                     {volist name="hots" id="list"}
                     <li class="ellipsis">
-                        <a href="achieveText.html">
+                        <a href="{:url('Product/more',['id'=>$list['id']])}">
                             <div class="fr color-grey-4 recomData">
                                 {$list.views}
                             </div>
