@@ -30,38 +30,7 @@
                     </li>
                     {/volist}
                 </ul>
-                <!--<ul class="clearfix tcomList_2">
-                    <li>
-                        <a href="techText.html">
-                            <h4 class="ellipsis">防刺服通常和哪些警用装备配合使用？</h4>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="techText.html">
-                            <h4 class="ellipsis">防刺服通常和哪些警用装备配合使用？</h4>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="techText.html">
-                            <h4 class="ellipsis">防刺服通常和哪些警用装备配合使用？</h4>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="techText.html">
-                            <h4 class="ellipsis">防刺服通常和哪些警用装备配合使用？</h4>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="techText.html">
-                            <h4 class="ellipsis">防刺服通常和哪些警用装备配合使用？</h4>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="techText.html">
-                            <h4 class="ellipsis">防刺服通常和哪些警用装备配合使用？</h4>
-                        </a>
-                    </li>
-                </ul> -->
+                
             </div>
             <div class="searBox">
                 <!--文章-->
@@ -194,7 +163,10 @@
                     {arc_id:arc_id,content:content,comment_id:comment_id},function(data){
 
                         if (data.msg=='ok') {
-                            layer.msg(data.data);
+                            layer.msg(''+data.data, function(){
+                            //关闭后的操作
+                                history.go();
+                            });
                         }else{
                             layer.msg('发表评论失败',{icon:5});
                         }
@@ -228,7 +200,10 @@
                 //执行POST
                 $.post("{:url('Secience/sendComment')}",{content:content,arc_id:arc_id,comment_id:comment_id},function(data){
                     if (data.msg=='ok') {
-                        layer.msg(data.data);
+                         layer.msg(''+data.data, function(){
+                            //关闭后的操作
+                                history.go();
+                            });
                     }else{
                         layer.msg('发表评论失败',{icon:5});
                     }
